@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:layout_margin="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neeraj8le.leavemanager.SignInActivity">
+    tools:context="com.neeraj8le.leavemanager.activity.SignInActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/signInButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello there"
-        android:textSize="40sp"/>
+        android:text="@string/sign_in"/>
 
 </RelativeLayout>
