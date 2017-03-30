@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "104334778883",
+    "firebase_url": "https://leavemanager-d91e4.firebaseio.com",
+    "project_id": "leavemanager-d91e4",
+    "storage_bucket": "leavemanager-d91e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104334778883:android:6c940a0c86d6d4cb",
+        "android_client_info": {
+          "package_name": "com.neeraj8le.leavemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104334778883-19062d5s0orkul9msh1ugceb4tst5fgt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neeraj8le.leavemanager",
+            "certificate_hash": "d6e4c40abc7ed5a48ecc49c4bb4bd58683a6fb48"
+          }
+        },
+        {
+          "client_id": "104334778883-ep3us2se9mf7v54j4qstcql6kisin7hp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3AO1ZYCVXyLemLmhtQdU38QES0J2KlBg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104334778883-ep3us2se9mf7v54j4qstcql6kisin7hp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
