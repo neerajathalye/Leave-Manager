@@ -59,22 +59,22 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     til8.setError("Passwords do not match");
                 }
-                 if (name.equals("")) {
+                 if (name.length()==0) {
                     til1.setError("Field cannot be empty");
-                } if (emp_id.equals("")) {
+                } if (emp_id.length()==0) {
                     til0.setError("Field cannot be empty");
-                } if (dept_name.equals("")) {
+                } if (dept_name.length()==0) {
                     til2.setError("Field cannot be empty");
-                } if (desig.equals("")) {
+                } if (desig.length()==0) {
                     til3.setError("Field cannot be empty");
-                } if (contact.equals("")) {
+                } if (contact.length()==0) {
                     til4.setError("Field cannot be empty");
-                } if (email.equals("")) {
+                } if (email.length()==0) {
                     til6.setError("Field cannot be empty");
-                } if (password.equals("")) {
+                } if (password.length()==0) {
                     til7.setError("Field cannot be empty");
                 }
-                if(con_pass.equals(""))
+                if(con_pass.length()==0)
                 {
                     til8.setError("Field cannot be empty");
                 }
