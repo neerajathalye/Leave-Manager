@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "104334778883-v2dbnrqddaillkbsvg41got6tkkr33kn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neeraj8le.leavemanager",
+            "certificate_hash": "8424705d0fd59c45640f59112d26419dc578cd0c"
+          }
+        },
+        {
           "client_id": "104334778883-19062d5s0orkul9msh1ugceb4tst5fgt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
