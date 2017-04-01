@@ -60,17 +60,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 emailTextInputLayout.setErrorEnabled(false);
                 passwordTextInputLayout.setErrorEnabled(false);
 
-                if(TextUtils.isEmpty(email))
-                    emailTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
-                else if (!isValidEmail(email))
-                    emailTextInputLayout.setError(getString(R.string.invalid_email_id));
-                else if(TextUtils.isEmpty(password))
-                    passwordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
-                else
-                {
+//                if(TextUtils.isEmpty(email))
+//                    emailTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+//                else if (!isValidEmail(email))
+//                    emailTextInputLayout.setError(getString(R.string.invalid_email_id));
+//                else if(TextUtils.isEmpty(password))
+//                    passwordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+//                else
+//                {
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
-                }
+//                }
                 break;
 
             case R.id.signUpButton:

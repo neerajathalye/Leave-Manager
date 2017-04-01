@@ -1,5 +1,6 @@
 package com.neeraj8le.leavemanager.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private FloatingActionButton addLeaveFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
+
+        addLeaveFAB = (FloatingActionButton) findViewById(R.id.addLeaveFAB);
+
+        addLeaveFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, addLeaveActivity.class);
+                startActivity(intent);
+            }
+        });
 
         viewPager  = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
