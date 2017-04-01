@@ -21,4 +21,6 @@
     <string name="department">Department</string>
     <string name="name">Name</string>
     <string name="id">ID</string>
+    <string name="password_error">Passwords do not match</string>
+    <string name="invalid_number">Invalid Number</string>
 </resources>

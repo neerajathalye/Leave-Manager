@@ -1,9 +1,9 @@
 package com.neeraj8le.leavemanager.activity;
 
-import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +18,11 @@ import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
     private Button mSubmit;
+    TextInputLayout idTextInputLayout,nameTextInputLayout,deptTextInputLayout,designationTextInputLayout,phoneTextInputLayout,emailTextInputLayout
+            ,passwordTextInputLayout,confirmPasswordTextInputLayout;
     Spinner s1;
-    String supervisor[] = {"Select supervisor", "Arnav", "Neeraj", "Priyanshu", "Yolo"};
+    String supervisors[] = {"Select supervisors", "Arnav", "Neeraj", "Priyanshu", "Yolo"};
+    String selectedSupervisor;
 
     void showToast(String msg)
 
@@ -33,56 +36,80 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         s1 = (Spinner) findViewById(R.id.spinner1);
         mSubmit = (Button) findViewById(R.id.submit);
-        final TextInputLayout til0 = (TextInputLayout) findViewById(R.id.textInputLayout0);
-        final TextInputLayout til1 = (TextInputLayout) findViewById(R.id.textInputLayout1);
-        final TextInputLayout til2 = (TextInputLayout) findViewById(R.id.textInputLayout2);
-        final TextInputLayout til3 = (TextInputLayout) findViewById(R.id.textInputLayout3);
-        final TextInputLayout til4 = (TextInputLayout) findViewById(R.id.textInputLayout4);
-        final TextInputLayout til6 = (TextInputLayout) findViewById(R.id.textInputLayout6);
-        final TextInputLayout til7 = (TextInputLayout) findViewById(R.id.textInputLayout7);
-        final TextInputLayout til8 = (TextInputLayout) findViewById(R.id.textInputLayout8);
-        final String emp_id = til0.getEditText().getText().toString();
-        final String name = til1.getEditText().getText().toString();
-        final String dept_name = til2.getEditText().getText().toString();
-        final String desig = til3.getEditText().getText().toString();
-        final String contact = til4.getEditText().getText().toString();
-        final String email = til6.getEditText().getText().toString();
-        final String password = til7.getEditText().getText().toString();
-        final String con_pass=til8.getEditText().getText().toString();
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, supervisor);
+        idTextInputLayout = (TextInputLayout) findViewById(R.id.idTextInputLayout);
+        nameTextInputLayout= (TextInputLayout) findViewById(R.id.nameTextInputLayout);
+        deptTextInputLayout = (TextInputLayout) findViewById(R.id.deptTextInputLayout);
+        designationTextInputLayout = (TextInputLayout) findViewById(R.id.designationTextInputLayout);
+        phoneTextInputLayout = (TextInputLayout) findViewById(R.id.phoneTextInputLayout);
+        emailTextInputLayout= (TextInputLayout) findViewById(R.id.emailTextInputLayout);
+        passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
+        confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, supervisors);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
-        final String supervise = s1.getSelectedItem().toString();
+
         mSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if(!(password.equals(con_pass)))
+
+                idTextInputLayout.setErrorEnabled(false);
+                nameTextInputLayout.setErrorEnabled(false);
+                deptTextInputLayout.setErrorEnabled(false);
+                designationTextInputLayout.setErrorEnabled(false);
+                phoneTextInputLayout.setErrorEnabled(false);
+                emailTextInputLayout.setErrorEnabled(false);
+                passwordTextInputLayout.setErrorEnabled(false);
+                confirmPasswordTextInputLayout.setErrorEnabled(false);
+
+
+                String emp_id = idTextInputLayout.getEditText().getText().toString();
+                String name = nameTextInputLayout.getEditText().getText().toString();
+                String dept_name = deptTextInputLayout.getEditText().getText().toString();
+                String desig = designationTextInputLayout.getEditText().getText().toString();
+                String contact = phoneTextInputLayout.getEditText().getText().toString();
+                String email = emailTextInputLayout.getEditText().getText().toString();
+                String password = passwordTextInputLayout.getEditText().getText().toString();
+                String con_pass=confirmPasswordTextInputLayout.getEditText().getText().toString();
+                String supervisor = selectedSupervisor;
+
+
+                 if (TextUtils.isEmpty(name)) {
+                    nameTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (TextUtils.isEmpty(emp_id)) {
+                    idTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (TextUtils.isEmpty(dept_name)) {
+                    deptTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (TextUtils.isEmpty(desig)) {
+                    designationTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (TextUtils.isEmpty(contact)) {
+                    phoneTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                }
+                 else if (contact.length() < 10) {
+                     phoneTextInputLayout.setError(getString(R.string.invalid_number));
+                 }else if (TextUtils.isEmpty(email)) {
+                    emailTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (!isValidEmail(email)) {
+                     emailTextInputLayout.setError(getString(R.string.invalid_email_id));
+                 }else if (TextUtils.isEmpty(password)) {
+                    passwordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                }
+                else if(TextUtils.isEmpty(con_pass))
                 {
-                    til8.setError("Passwords do not match");
+                    confirmPasswordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
                 }
-                 if (name.length()==0) {
-                    til1.setError("Field cannot be empty");
-                } if (emp_id.length()==0) {
-                    til0.setError("Field cannot be empty");
-                } if (dept_name.length()==0) {
-                    til2.setError("Field cannot be empty");
-                } if (desig.length()==0) {
-                    til3.setError("Field cannot be empty");
-                } if (contact.length()==0) {
-                    til4.setError("Field cannot be empty");
-                } if (email.length()==0) {
-                    til6.setError("Field cannot be empty");
-                } if (password.length()==0) {
-                    til7.setError("Field cannot be empty");
-                }
-                if(con_pass.length()==0)
+                else if(!(password.equals(con_pass)))
                 {
-                    til8.setError("Field cannot be empty");
+                    confirmPasswordTextInputLayout.setError(getString(R.string.password_error));
                 }
-                if (contact.length() > 10) {
-                    til4.setError("Number cannot be more than 10 digits long");
-                } if (!isValidEmail(email)) {
-                    til6.setError("Invalid Email");
-                }
+                else if(supervisor.equals(supervisors[0]))
+                 {
+                     showToast("Please select your supervisors");
+                 }
+                 else
+                 {
+                     //firebase sign up
+                 }
+
+
             }
 
         });
@@ -90,7 +117,8 @@ public class SignUpActivity extends AppCompatActivity {
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                showToast(supervisor[position]);
+                selectedSupervisor = s1.getSelectedItem().toString();
+                showToast(selectedSupervisor);
             }
 
             @Override

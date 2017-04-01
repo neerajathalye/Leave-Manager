@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-    android:padding="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.neeraj8le.leavemanager.activity.SignUpActivity">
     <LinearLayout
+        android:padding="16dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout0">
+            android:id="@+id/idTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et1"
                 android:hint="@string/id"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout1">
+            android:id="@+id/nameTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
 
         <EditText
-            android:id="@+id/et2"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textInputLayout0"
             android:layout_marginTop="6dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
             android:hint="@string/name"
             android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout2">
+            android:id="@+id/deptTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
 
             <EditText
-                android:id="@+id/et3"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textInputLayout1"
                 android:layout_marginTop="6dp"
                 android:hint="@string/department"
                 android:inputType="text" />
@@ -58,35 +67,44 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout3"
-            android:layout_marginTop="6dp">
+            android:id="@+id/designationTextInputLayout"
+            android:layout_marginTop="6dp"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
 
             <EditText
-                android:id="@+id/et4"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textInputLayout2"
                 android:layout_marginTop="6dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:hint="@string/designation"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout4">
+            android:id="@+id/phoneTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
 
             <EditText
-                android:id="@+id/et5"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textInputLayout3"
                 android:layout_marginTop="6dp"
                 android:hint="@string/phone_number"
-                android:inputType="number" />
+                android:inputType="phone"
+                android:maxLength="10"/>
         </android.support.design.widget.TextInputLayout>
 
         <Spinner
@@ -99,30 +117,33 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout6">
+            android:id="@+id/emailTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
             <EditText
-                android:id="@+id/et7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/spinner1"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="6dp"
                 android:hint="@string/email"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout7">
-
+            android:id="@+id/passwordTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
             <EditText
-                android:id="@+id/et8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textInputLayout6"
                 android:layout_marginTop="6dp"
                 android:hint="@string/password"
                 android:inputType="textPassword" />
@@ -130,14 +151,17 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout8">
+            android:id="@+id/confirmPasswordTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
             <EditText
-                android:id="@+id/et9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textInputLayout7"
                 android:layout_marginTop="6dp"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword" />

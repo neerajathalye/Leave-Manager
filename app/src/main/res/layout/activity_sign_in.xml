@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:padding="16dp"
+    android:background="@color/colorBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.neeraj8le.leavemanager.activity.SignInActivity">
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/emailTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/emailTextInputLayout" >
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        tools:targetApi="lollipop">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
             android:hint="@string/email"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -22,13 +28,14 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        tools:targetApi="lollipop">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/et1"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
             android:hint="@string/password"
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
@@ -43,6 +50,7 @@
         android:id="@+id/forgotPasswordTextView"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:clickable="true"
