@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     android:layout_margin="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,31 +10,26 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textInputLayout">
+        android:id="@+id/emailTextInputLayout" >
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et1"
-            android:hint="Email"
+            android:hint="@string/email"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textInputLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textInputLayout2">
+        android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/et2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/et1"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -42,28 +38,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/textInputLayout2"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="28dp" />
+    <TextView
+        android:id="@+id/forgotPasswordTextView"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:text="@string/forgot_password" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:layout_below="@+id/signInButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:text="@string/sign_up"
         android:layout_marginTop="73dp" />
 
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="Forgot Password?"
-        android:layout_below="@+id/signInButton"
-        android:layout_centerHorizontal="true" />
 
-
-</RelativeLayout>
+</LinearLayout>

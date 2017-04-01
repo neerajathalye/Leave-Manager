@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
     private Button mSubmit;
     Spinner s1;
-    String supervisor[] = {"Arnav", "Neeraj", "Priyanshu", "Yolo"};
+    String supervisor[] = {"Select supervisor", "Arnav", "Neeraj", "Priyanshu", "Yolo"};
 
     void showToast(String msg)
 

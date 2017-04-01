@@ -5,27 +5,17 @@
     android:layout_height="match_parent"
     android:id="@+id/layout2"
     android:padding="15dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout">
-
+            android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".7"
             android:imeOptions="actionDone"
-            android:singleLine="true"
-            android:hint="Enter registered Email"/>
+            android:hint="@string/enter_registered_email"
+            android:inputType="textEmailAddress"/>
         </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
 
 
 
