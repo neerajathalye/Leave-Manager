@@ -23,4 +23,7 @@
     <string name="id">ID</string>
     <string name="password_error">Passwords do not match</string>
     <string name="invalid_number">Invalid Number</string>
+    <string name="leave_reason">Leave Reason</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
 </resources>

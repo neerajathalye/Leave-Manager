@@ -5,32 +5,36 @@ import android.os.Parcelable;
 
 public class Employee implements Parcelable{
 
-    private long id;
+    private String id;
     private String name;
     private String departmentName;
     private String designation;
     private String phoneNumber;
     private String email;
-    private long supervisorId;
+    private String password;
+    private String supervisorId;
 
-    public Employee(long id, String name, String departmentName, String designation, String phoneNumber, String email, long supervisorId) {
+    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email,
+                    String password, String supervisorId) {
         this.id = id;
         this.name = name;
         this.departmentName = departmentName;
         this.designation = designation;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password=password;
         this.supervisorId = supervisorId;
     }
 
     protected Employee(Parcel in) {
-        id = in.readLong();
+        id = in.readString();
         name = in.readString();
         departmentName = in.readString();
         designation = in.readString();
         phoneNumber = in.readString();
         email = in.readString();
-        supervisorId = in.readLong();
+        password=in.readString();
+        supervisorId = in.readString();
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {
@@ -45,11 +49,11 @@ public class Employee implements Parcelable{
         }
     };
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -85,6 +89,14 @@ public class Employee implements Parcelable{
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password= password;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -93,11 +105,11 @@ public class Employee implements Parcelable{
         this.email = email;
     }
 
-    public long getSupervisorId() {
+    public String getSupervisorId() {
         return supervisorId;
     }
 
-    public void setSupervisorId(long supervisorId) {
+    public void setSupervisorId(String supervisorId) {
         this.supervisorId = supervisorId;
     }
 
@@ -108,12 +120,12 @@ public class Employee implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeString(id);
         dest.writeString(name);
         dest.writeString(departmentName);
         dest.writeString(designation);
         dest.writeString(phoneNumber);
         dest.writeString(email);
-        dest.writeLong(supervisorId);
+        dest.writeString(supervisorId);
     }
 }

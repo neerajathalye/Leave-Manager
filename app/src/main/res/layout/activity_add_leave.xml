@@ -1,9 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    android:background="@color/colorBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neeraj8le.leavemanager.activity.addLeaveActivity">
+    tools:context="com.neeraj8le.leavemanager.activity.AddLeaveActivity">
+    <LinearLayout
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/leave_type_spinner"
+            android:spinnerMode="dialog" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reasonTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
+            <EditText
+                android:id="@+id/leave_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/leave_reason"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fromTextInputLayout"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white"
+            tools:targetApi="lollipop">
 
-</android.support.constraint.ConstraintLayout>
+            <EditText
+                android:id="@+id/from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/white"
+                android:focusableInTouchMode="false"
+                android:backgroundTint="@color/white"
+                android:hint="@string/from_date"
+                android:clickable="true"
+                android:inputType="date"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/toTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            tools:targetApi="lollipop">
+
+            <EditText
+                android:id="@+id/to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:focusableInTouchMode="false"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="@color/white"
+                android:hint="@string/to_date"
+                android:textColor="@color/white"
+                android:clickable="true"
+                android:inputType="date"/>
+        </android.support.design.widget.TextInputLayout>
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/designationTextInputLayout"-->
+            <!--android:layout_marginTop="6dp"-->
+            <!--android:textColorHint="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/white"-->
+            <!--tools:targetApi="lollipop">-->
+
+            <!--<EditText-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:backgroundTint="@color/white"-->
+                <!--android:hint="@string/designation"-->
+                <!--android:inputType="text" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/phoneTextInputLayout"-->
+            <!--android:textColorHint="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/white"-->
+            <!--tools:targetApi="lollipop">-->
+
+            <!--<EditText-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:backgroundTint="@color/white"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:hint="@string/phone_number"-->
+                <!--android:inputType="phone"-->
+                <!--android:maxLength="10"/>-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <!---->
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/emailTextInputLayout"-->
+            <!--android:textColorHint="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/white"-->
+            <!--tools:targetApi="lollipop">-->
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:backgroundTint="@color/white"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:hint="@string/email"-->
+                <!--android:inputType="textEmailAddress" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/passwordTextInputLayout"-->
+            <!--android:textColorHint="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/white"-->
+            <!--tools:targetApi="lollipop">-->
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:backgroundTint="@color/white"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:hint="@string/password"-->
+                <!--android:inputType="textPassword" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/confirmPasswordTextInputLayout"-->
+            <!--android:textColorHint="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/white"-->
+            <!--tools:targetApi="lollipop">-->
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:backgroundTint="@color/white"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:hint="@string/confirm_password"-->
+                <!--android:inputType="textPassword" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:text="@string/submit" />
+    </LinearLayout>
+</ScrollView>

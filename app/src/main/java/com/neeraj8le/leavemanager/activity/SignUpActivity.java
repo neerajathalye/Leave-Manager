@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.model.Employee;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     Spinner s1;
     String supervisors[] = {"Select supervisors", "Arnav", "Neeraj", "Priyanshu", "Yolo"};
     String selectedSupervisor;
+    ArrayAdapter<String> adapter;
 
     void showToast(String msg)
 
@@ -44,9 +46,12 @@ public class SignUpActivity extends AppCompatActivity {
         emailTextInputLayout= (TextInputLayout) findViewById(R.id.emailTextInputLayout);
         passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, supervisors);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, supervisors);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -70,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = passwordTextInputLayout.getEditText().getText().toString();
                 String con_pass=confirmPasswordTextInputLayout.getEditText().getText().toString();
                 String supervisor = selectedSupervisor;
+
 
 
                  if (TextUtils.isEmpty(name)) {
@@ -106,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                  }
                  else
                  {
-                     //firebase sign up
+                     Employee emp=new Employee(emp_id,name,dept_name,desig,contact,email,con_pass,supervisor);
                  }
 
 

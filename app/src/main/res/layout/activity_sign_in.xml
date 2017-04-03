@@ -12,7 +12,7 @@
         android:id="@+id/emailTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/colorAccent"
         android:backgroundTint="@color/white"
         tools:targetApi="lollipop">
         <EditText
@@ -29,7 +29,8 @@
         android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/colorAccent"
         tools:targetApi="lollipop">
         <EditText
             android:layout_width="match_parent"

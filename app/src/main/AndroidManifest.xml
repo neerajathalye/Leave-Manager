@@ -20,8 +20,12 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.addLeaveActivity"></activity>
+        <activity android:name=".activity.SignUpActivity"
+            android:label="Sign Up"
+            android:parentActivityName=".activity.SignInActivity"/>
+        <activity android:name=".activity.AddLeaveActivity"
+            android:label="Add Leave details"
+            android:parentActivityName=".activity.MainActivity"></activity>
     </application>
 
 </manifest>

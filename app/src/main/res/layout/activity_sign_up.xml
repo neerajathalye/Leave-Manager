@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/idTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nameTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/deptTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/designationTextInputLayout"
             android:layout_marginTop="6dp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/phoneTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -118,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/emailTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -134,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passwordTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -152,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/confirmPasswordTextInputLayout"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorAccent"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
