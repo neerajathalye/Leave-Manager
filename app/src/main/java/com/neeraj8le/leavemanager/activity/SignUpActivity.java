@@ -91,9 +91,14 @@ public class SignUpActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(SignUpActivity.this, "SIGN IN", Toast.LENGTH_SHORT).show();
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    if (user.isEmailVerified()) {
+                        Toast.makeText(SignUpActivity.this,"Welcome!",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        user.sendEmailVerification();
+                        Toast.makeText(SignUpActivity.this,"Kindly Verify your Email Id",Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -105,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                progressDialog.show();
+
 
                 idTextInputLayout.setErrorEnabled(false);
                 nameTextInputLayout.setErrorEnabled(false);
@@ -163,6 +168,8 @@ public class SignUpActivity extends AppCompatActivity {
                  }
                  else
                  {
+                     progressDialog.show();
+
                      final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor);
 
 
@@ -197,20 +204,19 @@ public class SignUpActivity extends AppCompatActivity {
 //                                             current_user_db.child("phoneNumber").setValue(phoneNumber);
 //                                             current_user_db.child("email").setValue(email);
                                              progressDialog.dismiss();
+                                             Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                             startActivity(intent);
                                              finish();
                                          }
-
                                      }
                                  });
                              }
                          }
-
                          @Override
                          public void onCancelled(DatabaseError databaseError) {
                              Toast.makeText(SignUpActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                          }
                      });
-
                  }
             }
 

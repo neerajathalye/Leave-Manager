@@ -1,8 +1,10 @@
 package com.neeraj8le.leavemanager.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
 
 import java.util.regex.Matcher;
@@ -29,6 +41,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     TextInputLayout emailTextInputLayout,passwordTextInputLayout;
     String email;
     String password;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +59,40 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         signUpButton=(Button)findViewById(R.id.signUpButton);
         signInButton = (Button) findViewById(R.id.signInButton);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setTitle("Please Wait");
+        progressDialog.setMessage("Signing In...");
+
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
         forgotPasswordTextView.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("employee");
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                if (user != null)
+                {
+                    progressDialog.dismiss();
+
+                    if (user.isEmailVerified())
+                    {
+                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(SignInActivity.this, "Kindly Verify your Email Id first", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        };
     }
 
     @Override
@@ -54,23 +101,39 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         {
             case R.id.signInButton:
 
+                progressDialog.show();
+
                 email = emailTextInputLayout.getEditText().getText().toString();
                 password = passwordTextInputLayout.getEditText().getText().toString();
 
                 emailTextInputLayout.setErrorEnabled(false);
                 passwordTextInputLayout.setErrorEnabled(false);
 
-//                if(TextUtils.isEmpty(email))
-//                    emailTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
-//                else if (!isValidEmail(email))
-//                    emailTextInputLayout.setError(getString(R.string.invalid_email_id));
-//                else if(TextUtils.isEmpty(password))
-//                    passwordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
-//                else
-//                {
-                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    startActivity(intent);
-//                }
+                if(TextUtils.isEmpty(email))
+                    emailTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                else if (!isValidEmail(email))
+                    emailTextInputLayout.setError(getString(R.string.invalid_email_id));
+                else if(TextUtils.isEmpty(password))
+                    passwordTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                else
+                {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if(task.isSuccessful())
+                            {
+                                checkUserExists();
+                            }
+                            else
+                            {
+                                Toast.makeText(SignInActivity.this, "Wrong email/password", Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    });
+                }
                 break;
 
             case R.id.signUpButton:
@@ -101,6 +164,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     {
 
                         String email = emailTextInputLayout.getEditText().getText().toString();
+                        mAuth.sendPasswordResetEmail(email);
+                        Toast.makeText(SignInActivity.this, "Password Reset Mail has been sent.", Toast.LENGTH_SHORT).show();
                     }
                 });
                 AlertDialog dialog = alert.create();
@@ -119,6 +184,54 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
 
+    }
+
+    private void checkUserExists()
+    {
+        final String user_id = mAuth.getCurrentUser().getUid();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.hasChild(user_id))
+                {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user.isEmailVerified()) {
+                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else {
+                        Toast.makeText(SignInActivity.this, "Kindly Verify your Email Id", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    Toast.makeText(SignInActivity.this, "You need to sign up first...", Toast.LENGTH_LONG).show();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 

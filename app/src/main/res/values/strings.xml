@@ -27,4 +27,5 @@
     <string name="from_date">From Date</string>
     <string name="to_date">To Date</string>
     <string name="auth_failed">Authorization Failed!</string>
+    <string name="logout">Logout</string>
 </resources>
