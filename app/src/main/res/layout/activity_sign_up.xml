@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/idTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nameTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/deptTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/designationTextInputLayout"
             android:layout_marginTop="6dp"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/phoneTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
 
@@ -108,17 +108,19 @@
         </android.support.design.widget.TextInputLayout>
 
         <Spinner
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinner1"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dialog"
+
+            android:popupBackground="@color/colorBackground"/>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/emailTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -134,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passwordTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText
@@ -152,7 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/confirmPasswordTextInputLayout"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
             tools:targetApi="lollipop">
             <EditText

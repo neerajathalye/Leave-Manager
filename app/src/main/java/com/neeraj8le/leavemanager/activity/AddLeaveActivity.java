@@ -2,6 +2,7 @@ package com.neeraj8le.leavemanager.activity;
 
 
 import android.app.DatePickerDialog;
+import android.graphics.PorterDuff;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -57,9 +58,12 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
         mfrom=(EditText)findViewById(R.id.from);
         mto=(EditText)findViewById(R.id.to);
         s1 = (Spinner) findViewById(R.id.leave_type_spinner);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leave_type);
+
+        adapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, leave_type);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
+        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+
         selectedLeave = s1.getSelectedItem().toString();
         myCalendar=Calendar.getInstance();
 

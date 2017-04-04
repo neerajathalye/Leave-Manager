@@ -1,5 +1,6 @@
 package com.neeraj8le.leavemanager.activity;
 
+import android.graphics.PorterDuff;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,9 +47,12 @@ public class SignUpActivity extends AppCompatActivity {
         emailTextInputLayout= (TextInputLayout) findViewById(R.id.emailTextInputLayout);
         passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, supervisors);
+
+        adapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, supervisors);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
+        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -112,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                  }
                  else
                  {
-                     Employee emp=new Employee(emp_id,name,dept_name,desig,contact,email,con_pass,supervisor);
+                     Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,con_pass,supervisor);
                  }
 
 
