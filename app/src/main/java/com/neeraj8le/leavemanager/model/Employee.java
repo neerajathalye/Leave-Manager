@@ -11,18 +11,15 @@ public class Employee implements Parcelable{
     private String designation;
     private String phoneNumber;
     private String email;
-    private String password;
     private String supervisorId;
 
-    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email,
-                    String password, String supervisorId) {
+    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String supervisorId) {
         this.id = id;
         this.name = name;
         this.departmentName = departmentName;
         this.designation = designation;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.password=password;
         this.supervisorId = supervisorId;
     }
 
@@ -33,7 +30,6 @@ public class Employee implements Parcelable{
         designation = in.readString();
         phoneNumber = in.readString();
         email = in.readString();
-        password=in.readString();
         supervisorId = in.readString();
     }
 
@@ -89,13 +85,6 @@ public class Employee implements Parcelable{
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password= password;
-    }
 
     public String getEmail() {
         return email;
