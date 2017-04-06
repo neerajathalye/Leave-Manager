@@ -78,17 +78,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                progressDialog.show();
 
                 if (user != null)
                 {
-
                     if (user.isEmailVerified())
                     {
 
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                progressDialog.show();
                                 for(DataSnapshot ds : dataSnapshot.getChildren())
                                 {
                                     if (ds.child("email").getValue().equals(mAuth.getCurrentUser().getEmail()))

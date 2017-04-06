@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.model.Employee;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputLayout idTextInputLayout,nameTextInputLayout,deptTextInputLayout,designationTextInputLayout,phoneTextInputLayout,emailTextInputLayout
             ,passwordTextInputLayout,confirmPasswordTextInputLayout;
     Spinner s1;
-    String supervisors[] = {"Select supervisors", "Arnav", "Neeraj", "Priyanshu", "Yolo"};
+    ArrayList<String> supervisors;
     String selectedSupervisor;
     ArrayAdapter<String> adapter;
     private FirebaseAuth mAuth;
@@ -68,11 +69,6 @@ public class SignUpActivity extends AppCompatActivity {
         passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
 
-        adapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, supervisors);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s1.setAdapter(adapter);
-        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -80,6 +76,30 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("employee");
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                supervisors = new ArrayList<>();
+                supervisors.add("Please Select your supervisor");
+
+                for (DataSnapshot ds : dataSnapshot.getChildren())
+                {
+                    supervisors.add(ds.child("name").getValue().toString());
+                }
+                adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                s1.setAdapter(adapter);
+                s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -162,9 +182,9 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     confirmPasswordTextInputLayout.setError(getString(R.string.password_error));
                 }
-                else if(supervisor.equals(supervisors[0]))
+                else if(supervisor.equals(supervisors.get(0)))
                  {
-                     showToast("Please select your supervisors");
+                     showToast("Please select your supervisor");
                  }
                  else
                  {
