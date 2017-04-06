@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/cardview_dark_background"
+    app:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:id="@+id/history_container"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+        <TextView
+            android:id="@+id/leave_historyDatesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 Mar 17 - 4 Apr 17"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/leave_historyTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maternity Leave"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:layout_below="@id/leave_historyDatesTextView"/>
+        <ImageView
+            android:id="@+id/leave_historyStatusImageView"
+            android:contentDescription="@string/leave_icon_content_description"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_circle_green_48dp"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
