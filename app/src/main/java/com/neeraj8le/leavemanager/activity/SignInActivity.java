@@ -77,13 +77,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-
                 if (user != null)
                 {
                     if (user.isEmailVerified())
                     {
-
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -212,6 +209,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private void checkUserExists()
     {
+        progressDialog.show();
         final String user_id = mAuth.getCurrentUser().getUid();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -221,9 +219,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user.isEmailVerified()) {
-                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+//                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                        finish();
                     }
                     else {
                         Toast.makeText(SignInActivity.this, "Kindly Verify your Email Id", Toast.LENGTH_LONG).show();

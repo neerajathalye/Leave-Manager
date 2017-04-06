@@ -63,7 +63,7 @@ public class PendingLeaveRequestFragment extends Fragment {
                     if(ds.child("employeeId").getValue().equals(employee.getId()))
                     {
                         leaves.add(ds.getValue(Leave.class));
-                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
 
                     }
                 }
