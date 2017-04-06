@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.neeraj8le.leavemanager.R;
@@ -20,6 +19,7 @@ import com.neeraj8le.leavemanager.adapter.ViewPagerAdapter;
 import com.neeraj8le.leavemanager.fragment.LeaveHistoryFragment;
 import com.neeraj8le.leavemanager.fragment.PendingLeaveRequestFragment;
 import com.neeraj8le.leavemanager.fragment.SubordinateLeaveRequestFragment;
+import com.neeraj8le.leavemanager.model.Employee;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addLeaveFAB;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private Employee employee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
+
+        employee = getIntent().getParcelableExtra("employee");
+//        Toast.makeText(this, "main : " + employee.getName(), Toast.LENGTH_SHORT).show();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -56,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
         addLeaveFAB = (FloatingActionButton) findViewById(R.id.addLeaveFAB);
 
         addLeaveFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddLeaveActivity.class);
+                intent.putExtra("employee", employee);
                 startActivity(intent);
             }
         });
@@ -76,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PendingLeaveRequestFragment(), "Pending");
-        adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests");
-        adapter.addFragment(new LeaveHistoryFragment(), "History");
+        adapter.addFragment(new PendingLeaveRequestFragment(), "Pending", employee);
+        adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests", employee);
+        adapter.addFragment(new LeaveHistoryFragment(), "History", employee);
         viewPager.setAdapter(adapter);
     }
 

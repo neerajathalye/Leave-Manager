@@ -13,6 +13,8 @@ public class Employee implements Parcelable{
     private String email;
     private String supervisorId;
 
+    public Employee() {}
+
     public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String supervisorId) {
         this.id = id;
         this.name = name;

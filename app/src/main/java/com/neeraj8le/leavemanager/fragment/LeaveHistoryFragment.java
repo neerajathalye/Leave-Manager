@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.adapter.LeaveHistoryRecyclerAdapter;
-import com.neeraj8le.leavemanager.adapter.PendingLeaveRequestRecyclerAdapter;
 import com.neeraj8le.leavemanager.model.Leave;
 
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ public class LeaveHistoryFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,9 +35,9 @@ public class LeaveHistoryFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_leave_history, container, false);
         leaves_history = new ArrayList<>();
 
-        leaves_history.add(new Leave(1, 2, "Maternity Leave", "Had a baby", "1 Apr 17", "1 May 17", 0, "30 Mar 17"));
-        leaves_history.add(new Leave(1, 2, "Study Leave", "studying for mba", "10 Apr 17", "1 May 17", 1, "30 Mar 17"));
-        leaves_history.add(new Leave(1, 2, "Casual Leave", "just for fun", "27 Apr 17", "14 May 17", 2, "30 Mar 17"));
+        leaves_history.add(new Leave("1", "1", "Maternity Leave", "Had a baby", "10 Apr 17", "1 May 17", 0, "30 Mar 17"));
+        leaves_history.add(new Leave("1", "1", "Study Leave", "studying for mba", "10 Apr 17", "1 May 17", 1, "30 Mar 17"));
+        leaves_history.add(new Leave("1", "1", "Casual Leave", "just for fun", "27 Apr 17", "14 May 17", 2, "30 Mar 17"));
 
         leaveHistoryRecyclerAdapter = new LeaveHistoryRecyclerAdapter(getContext(), leaves_history);
 

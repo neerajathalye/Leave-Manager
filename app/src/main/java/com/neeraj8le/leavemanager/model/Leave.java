@@ -6,8 +6,8 @@ import android.os.Parcelable;
 
 public class Leave implements Parcelable {
 
-    private long employeeId;
-    private long supervisorId;
+    private String employeeId;
+    private String supervisorId;
     private String leaveType;
     private String leaveReason;
     private String fromDate;
@@ -15,7 +15,7 @@ public class Leave implements Parcelable {
     private long leaveStatus; // 0 --> on hold, 1 --> accepted, 2 --> rejected
     private String applicationDate;
 
-    public Leave(long employeeId, long supervisorId, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
+    public Leave(String employeeId, String supervisorId, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
         this.employeeId = employeeId;
         this.supervisorId = supervisorId;
         this.leaveType = leaveType;
@@ -27,8 +27,8 @@ public class Leave implements Parcelable {
     }
 
     protected Leave(Parcel in) {
-        employeeId = in.readLong();
-        supervisorId = in.readLong();
+        employeeId = in.readString();
+        supervisorId = in.readString();
         leaveType = in.readString();
         leaveReason = in.readString();
         fromDate = in.readString();
@@ -49,19 +49,19 @@ public class Leave implements Parcelable {
         }
     };
 
-    public long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
-    public long getSupervisorId() {
+    public String getSupervisorId() {
         return supervisorId;
     }
 
-    public void setSupervisorId(long supervisorId) {
+    public void setSupervisorId(String supervisorId) {
         this.supervisorId = supervisorId;
     }
 
@@ -120,8 +120,8 @@ public class Leave implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(employeeId);
-        dest.writeLong(supervisorId);
+        dest.writeString(employeeId);
+        dest.writeString(supervisorId);
         dest.writeString(leaveType);
         dest.writeString(leaveReason);
         dest.writeString(fromDate);

@@ -20,11 +20,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.fragment.DatePickerFragment;
+import com.neeraj8le.leavemanager.model.Employee;
+import com.neeraj8le.leavemanager.model.Leave;
 
 public class AddLeaveActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
+    Employee employee;
     private Button mSubmit;
     Spinner s1;
     String leave_type[] = {"Select Leave type","Earned Leave","Casual Leave","Medical Leave","Maternity Leave","Quarantine Leave",
@@ -39,6 +47,8 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
     private TextInputLayout leave_reason,from_date,to_date;
     EditText mreason,mfrom,mto;
     EditText selectedEditText;
+    DatabaseReference mDatabase;
+    long size;
 
     void showToast(String msg)
 
@@ -66,6 +76,10 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 
         selectedLeave = s1.getSelectedItem().toString();
         myCalendar=Calendar.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
+
+        employee = getIntent().getParcelableExtra("employee");
 
 //        final DatePickerDialog.OnDateSetListener date=new DatePickerDialog.OnDateSetListener(){
 //            @Override
@@ -119,16 +133,39 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                 String reason=leave_reason.getEditText().getText().toString();
                 String from=from_date.getEditText().getText().toString();
                 String to=to_date.getEditText().getText().toString();
+                String leaveType = selectedLeave;
+                Calendar c = Calendar.getInstance();
+                String myFormat="dd MMM yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String applicationDate = sdf.format(c.getTime());
+
+                final Leave leave = new Leave(employee.getId(), employee.getSupervisorId(), leaveType, reason, from, to, 0, applicationDate);
+
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        size = dataSnapshot.getChildrenCount();
+                        mDatabase.child(String.valueOf(size)).setValue(leave);
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
         });
     }
-    private void updateLabel()
-    {
-        String myFormat="MM/dd/yy";
-        SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.US);
-        mfrom.setText(sdf.format(myCalendar.getTime()));
-        mto.setText(sdf.format(myCalendar.getTime()));
-    }
+//    private void updateLabel()
+//    {
+//        String myFormat="MM/dd/yy";
+//        SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.US);
+//        mfrom.setText(sdf.format(myCalendar.getTime()));
+//        mto.setText(sdf.format(myCalendar.getTime()));
+//    }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -147,8 +184,7 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 
     public void updateDate(EditText v)
     {
-
-        String myFormat="MM/dd/yy";
+        String myFormat="dd MMM yy";
         SimpleDateFormat sdf=new SimpleDateFormat(myFormat, Locale.US);
         v.setText(sdf.format(myCalendar.getTime()));
     }

@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.model.Employee;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +46,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     ProgressDialog progressDialog;
+    private Employee employee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,15 +78,38 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                progressDialog.show();
+
                 if (user != null)
                 {
-                    progressDialog.dismiss();
 
                     if (user.isEmailVerified())
                     {
-                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot ds : dataSnapshot.getChildren())
+                                {
+                                    if (ds.child("email").getValue().equals(mAuth.getCurrentUser().getEmail()))
+                                    {
+                                        employee = ds.getValue(Employee.class);
+//                                        Toast.makeText(SignInActivity.this, "Sign in " + employee.getName(), Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
+                                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                        intent.putExtra("employee", employee);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }
                     else
                     {
