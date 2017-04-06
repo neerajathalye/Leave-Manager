@@ -15,6 +15,8 @@ public class Leave implements Parcelable {
     private long leaveStatus; // 0 --> on hold, 1 --> accepted, 2 --> rejected
     private String applicationDate;
 
+    public Leave(){}
+
     public Leave(String employeeId, String supervisorId, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
         this.employeeId = employeeId;
         this.supervisorId = supervisorId;
