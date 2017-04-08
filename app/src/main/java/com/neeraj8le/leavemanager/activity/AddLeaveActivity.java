@@ -139,7 +139,7 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 String applicationDate = sdf.format(c.getTime());
 
-                final Leave leave = new Leave(employee.getId(), employee.getSupervisorId(), leaveType, reason, from, to, 0, applicationDate);
+                final Leave leave = new Leave(employee.getName(), employee.getsupervisorName(), leaveType, reason, from, to, 0, applicationDate);
 
                 mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

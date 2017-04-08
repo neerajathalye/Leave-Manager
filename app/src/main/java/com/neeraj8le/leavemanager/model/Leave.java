@@ -6,8 +6,8 @@ import android.os.Parcelable;
 
 public class Leave implements Parcelable {
 
-    private String employeeId;
-    private String supervisorId;
+    private String employee;
+    private String supervisor;
     private String leaveType;
     private String leaveReason;
     private String fromDate;
@@ -17,9 +17,9 @@ public class Leave implements Parcelable {
 
     public Leave(){}
 
-    public Leave(String employeeId, String supervisorId, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
-        this.employeeId = employeeId;
-        this.supervisorId = supervisorId;
+    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
+        this.employee = employee;
+        this.supervisor = supervisor;
         this.leaveType = leaveType;
         this.leaveReason = leaveReason;
         this.fromDate = fromDate;
@@ -29,8 +29,8 @@ public class Leave implements Parcelable {
     }
 
     protected Leave(Parcel in) {
-        employeeId = in.readString();
-        supervisorId = in.readString();
+        employee = in.readString();
+        supervisor = in.readString();
         leaveType = in.readString();
         leaveReason = in.readString();
         fromDate = in.readString();
@@ -51,20 +51,20 @@ public class Leave implements Parcelable {
         }
     };
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(String employeeId) {
+        this.employee = employeeId;
     }
 
-    public String getSupervisorId() {
-        return supervisorId;
+    public String getSupervisor() {
+        return supervisor;
     }
 
-    public void setSupervisorId(String supervisorId) {
-        this.supervisorId = supervisorId;
+    public void setSupervisor(String supervisor) {
+        this.supervisor = supervisor;
     }
 
     public String getLeaveType() {
@@ -122,8 +122,8 @@ public class Leave implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(employeeId);
-        dest.writeString(supervisorId);
+        dest.writeString(employee);
+        dest.writeString(supervisor);
         dest.writeString(leaveType);
         dest.writeString(leaveReason);
         dest.writeString(fromDate);

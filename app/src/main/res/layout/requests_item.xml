@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/cardview_dark_background"
+    app:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+        <TextView
+            android:id="@+id/subordinateNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neeraj Athalye"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/leaveDatesTextView"
+            android:layout_below="@id/subordinateNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 Mar 17 - 4 Apr 17"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/leaveTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maternity Leave"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_below="@id/leaveDatesTextView"/>
+        <ImageView
+            android:id="@+id/leaveStatusImageView"
+            android:contentDescription="@string/leave_icon_content_description"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_remove_circle_yellow_48dp"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+

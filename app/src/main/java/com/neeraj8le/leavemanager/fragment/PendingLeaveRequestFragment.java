@@ -46,10 +46,7 @@ public class PendingLeaveRequestFragment extends Fragment {
         final View v =  inflater.inflate(R.layout.fragment_pending_leave_request, container, false);
 
         employee = getArguments().getParcelable("employee");
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
-
-
 
         mDatabase.addValueEventListener(new ValueEventListener() {
 
@@ -60,7 +57,7 @@ public class PendingLeaveRequestFragment extends Fragment {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {
-                    if(ds.child("employeeId").getValue().equals(employee.getId()) && (long) ds.child("leaveStatus").getValue() == 0)
+                    if(ds.child("employee").getValue().equals(employee.getName()) && (long) ds.child("leaveStatus").getValue() == 0)
                     {
                         leaves.add(ds.getValue(Leave.class));
 //                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();

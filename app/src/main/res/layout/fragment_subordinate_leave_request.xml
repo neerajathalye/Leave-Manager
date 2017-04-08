@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neeraj8le.leavemanager.fragment.SubordinateLeaveRequestFragment">
+    tools:context="com.neeraj8le.leavemanager.fragment.SubordinateLeaveRequestFragment"
+    android:background="@color/colorBackground">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/requestsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="subordinate leave request" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

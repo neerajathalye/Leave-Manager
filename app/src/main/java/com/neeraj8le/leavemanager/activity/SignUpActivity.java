@@ -69,6 +69,16 @@ public class SignUpActivity extends AppCompatActivity {
         passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
 
+        supervisors = new ArrayList<>();
+        supervisors.add("Select your supervisor");
+        supervisors.add("admin");
+
+
+        adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s1.setAdapter(adapter);
+        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -82,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 supervisors = new ArrayList<>();
-                supervisors.add("Please Select your supervisor");
+                supervisors.add("Select your supervisor");
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {
@@ -154,10 +164,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-                 if (TextUtils.isEmpty(name)) {
+                 if (TextUtils.isEmpty(emp_id)) {
+                     idTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
+                } else if (TextUtils.isEmpty(name)) {
                     nameTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
-                } else if (TextUtils.isEmpty(emp_id)) {
-                    idTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
                 } else if (TextUtils.isEmpty(dept_name)) {
                     deptTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
                 } else if (TextUtils.isEmpty(desig)) {
@@ -193,19 +203,19 @@ public class SignUpActivity extends AppCompatActivity {
                      final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor);
 
 
-                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                         @Override
-                         public void onDataChange(DataSnapshot dataSnapshot) {
-                             for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                                 Log.d(TAG, ds.getValue().toString());
-                                 if (ds.child("email").getValue().toString().equals(email)) {
-                                     Toast.makeText(SignUpActivity.this, "There is already an account registered with this Email Id.", Toast.LENGTH_SHORT).show();
-                                     progressDialog.dismiss();
-                                     userExists = true;
-                                 }
-                             }
-
-                             if(!userExists)
+//                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//                         @Override
+//                         public void onDataChange(DataSnapshot dataSnapshot) {
+//                             for(DataSnapshot ds : dataSnapshot.getChildren()) {
+//                                 Log.d(TAG, ds.getValue().toString());
+//                                 if (ds.child("email").getValue().toString().equals(email)) {
+//                                     Toast.makeText(SignUpActivity.this, "There is already an account registered with this Email Id.", Toast.LENGTH_SHORT).show();
+//                                     progressDialog.dismiss();
+//                                     userExists = true;
+//                                 }
+//                             }
+//
+//                             if(!userExists)
                              {
                                  mAuth.createUserWithEmailAndPassword(employee.getEmail(), password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                      @Override
@@ -218,11 +228,7 @@ public class SignUpActivity extends AppCompatActivity {
                                          else
                                          {
                                              final String user_id = mAuth.getCurrentUser().getUid();
-//                                             DatabaseReference current_user_db = mDatabase.child(user_id);
                                              mDatabase.child(user_id).setValue(employee);
-//                                             current_user_db.child("name").setValue(name);
-//                                             current_user_db.child("phoneNumber").setValue(phoneNumber);
-//                                             current_user_db.child("email").setValue(email);
                                              progressDialog.dismiss();
                                              Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                                              startActivity(intent);
@@ -231,12 +237,12 @@ public class SignUpActivity extends AppCompatActivity {
                                      }
                                  });
                              }
-                         }
-                         @Override
-                         public void onCancelled(DatabaseError databaseError) {
-                             Toast.makeText(SignUpActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-                         }
-                     });
+//                         }
+//                         @Override
+//                         public void onCancelled(DatabaseError databaseError) {
+//                             Toast.makeText(SignUpActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                         }
+//                     });
                  }
             }
 

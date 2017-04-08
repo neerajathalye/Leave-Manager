@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.neeraj8le.leavemanager.R;
 
 public class LeaveHistoryViewHolder extends RecyclerView.ViewHolder {
+
     public TextView leave_historyDatesTextView, leave_historyTypeTextView;
     public ImageView leave_historyStatusImageView;
     public RelativeLayout history_container;

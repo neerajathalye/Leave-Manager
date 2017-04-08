@@ -55,7 +55,7 @@ public class LeaveHistoryFragment extends Fragment {
             for (DataSnapshot ds : dataSnapshot.getChildren())
             {
 
-                if(ds.child("employeeId").getValue().equals(employee.getId()) && (long) ds.child("leaveStatus").getValue() != 0)
+                if(ds.child("employee").getValue().equals(employee.getName()) && (long) ds.child("leaveStatus").getValue() != 0)
                 {
                     leaves_history.add(ds.getValue(Leave.class));
 //                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
