@@ -79,6 +79,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null)
                 {
+                    progressDialog.show();
                     if (user.isEmailVerified())
                     {
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
