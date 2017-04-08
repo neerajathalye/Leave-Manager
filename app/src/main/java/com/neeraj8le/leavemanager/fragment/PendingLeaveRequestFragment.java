@@ -54,6 +54,7 @@ public class PendingLeaveRequestFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 leaves = new ArrayList<>();
+                employee = getArguments().getParcelable("employee");
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {

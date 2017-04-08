@@ -1,15 +1,15 @@
 package com.neeraj8le.leavemanager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.activity.LeavePermission;
 import com.neeraj8le.leavemanager.model.Leave;
-import com.neeraj8le.leavemanager.viewholder.PendingLeaveRequestViewHolder;
 import com.neeraj8le.leavemanager.viewholder.RequestsViewHolder;
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
 
     Context context;
     ArrayList<Leave> leaves;
+    Leave leave;
 
     public RequestsRecyclerAdapter(Context context, ArrayList<Leave> leaves) {
         this.context = context;
@@ -35,9 +36,9 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
     }
 
     @Override
-    public void onBindViewHolder(final RequestsViewHolder holder, int position) {
+    public void onBindViewHolder(final RequestsViewHolder holder, final int position) {
 
-        String leaveDates = leaves.get(position).getFromDate() + " - " + leaves.get(position).getToDate();
+        final String leaveDates = leaves.get(position).getFromDate() + " - " + leaves.get(position).getToDate();
         holder.leaveDatesTextView.setText(leaveDates);
         holder.leaveTypeTextView.setText(leaves.get(position).getLeaveType());
         holder.subordinateNameTextView.setText(leaves.get(position).getEmployee());
@@ -51,7 +52,16 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, String.valueOf(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, String.valueOf(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context,LeavePermission.class);
+                Leave leave=new Leave(leaves.get(position).getEmployee(),leaves.get(position).getSupervisor(),leaves.get(position).getLeaveType()
+                ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
+                        leaves.get(position).getApplicationDate());
+                intent.putExtra("leave",leave);
+//                intent.putExtra("Leave Type:",leaves.get(position).getLeaveType());
+//                intent.putExtra("Leave Reason:",leaves.get(position).getLeaveReason());
+//                intent.putExtra("Leave Duration:",leaveDates);
+                context.startActivity(intent);
             }
         });
     }

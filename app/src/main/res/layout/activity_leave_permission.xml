@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/colorBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.neeraj8le.leavemanager.activity.SignInActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/leave_type"
+        android:textSize="15dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/current_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leave_type"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/white"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/from_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/leave_reason"
+        android:textSize="15dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/to_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/from_date"
+        android:textSize="15dp"
+        android:textColor="@color/white" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/leave_reason"
+        android:layout_below="@+id/to_date"
+        android:layout_marginTop="55dp"
+        android:textSize="15dp"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/reject"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reject"
+        android:textColor="@color/black" />
+
+</LinearLayout>

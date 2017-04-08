@@ -8,12 +8,12 @@ public class Leave implements Parcelable {
 
     private String employee;
     private String supervisor;
-    private String leaveType;
-    private String leaveReason;
-    private String fromDate;
-    private String toDate;
+    public String leaveType;
+    public String leaveReason;
+    public String fromDate;
+    public String toDate;
     private long leaveStatus; // 0 --> on hold, 1 --> accepted, 2 --> rejected
-    private String applicationDate;
+    public String applicationDate;
 
     public Leave(){}
 

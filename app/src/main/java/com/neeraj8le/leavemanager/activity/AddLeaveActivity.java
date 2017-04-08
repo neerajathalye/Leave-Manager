@@ -48,6 +48,7 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
     EditText mreason,mfrom,mto;
     EditText selectedEditText;
     DatabaseReference mDatabase;
+    DatePicker datePicker;
     long size;
 
     void showToast(String msg)
@@ -76,6 +77,10 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 
         selectedLeave = s1.getSelectedItem().toString();
         myCalendar=Calendar.getInstance();
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
