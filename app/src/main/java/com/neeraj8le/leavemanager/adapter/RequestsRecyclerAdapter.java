@@ -36,7 +36,7 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
     }
 
     @Override
-    public void onBindViewHolder(final RequestsViewHolder holder, final int position) {
+    public void onBindViewHolder(final RequestsViewHolder holder, int position) {
 
         final String leaveDates = leaves.get(position).getFromDate() + " - " + leaves.get(position).getToDate();
         holder.leaveDatesTextView.setText(leaveDates);
@@ -54,13 +54,10 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
             public void onClick(View v) {
 //                Toast.makeText(context, String.valueOf(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context,RequestLeaveActivity.class);
-                Leave leave=new Leave(leaves.get(position).getEmployee(),leaves.get(position).getSupervisor(),leaves.get(position).getLeaveType()
-                ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
-                        leaves.get(position).getApplicationDate());
-                intent.putExtra("leave",leave);
-//                intent.putExtra("Leave Type:",leaves.get(position).getLeaveType());
-//                intent.putExtra("Leave Reason:",leaves.get(position).getLeaveReason());
-//                intent.putExtra("Leave Duration:",leaveDates);
+//                Leave leave=new Leave(leaves.get(position).getEmployee(),leaves.get(position).getSupervisor(),leaves.get(position).getLeaveType()
+//                ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
+//                        leaves.get(position).getApplicationDate(), leaves.get(position).getId());
+                intent.putExtra("leave",leaves.get(holder.getAdapterPosition()));
                 context.startActivity(intent);
             }
         });

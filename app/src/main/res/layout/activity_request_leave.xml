@@ -8,61 +8,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.neeraj8le.leavemanager.activity.SignInActivity">
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:text="@string/date_of_application"/>
+
+        <TextView
+            android:id="@+id/current_date"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Apr 17"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/from"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/from_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="12 Apr 17"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/to"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="17 Apr 17"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/leave_type"
+            android:textColor="@color/colorAccent" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/leave_type"
+            android:textSize="18sp"
+            android:text="Casual Leave"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/reason"/>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/leave_reason"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="reason for leave here"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/leave_type"
-        android:textSize="15dp"
-        android:textColor="@color/white" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/current_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/leave_type"
-        android:layout_marginTop="35dp"
-        android:textColor="@color/white"
-        android:textSize="15dp" />
+        <Button
+            android:id="@+id/reject"
+            style="?attr/buttonBarPositiveButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reject"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/from_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/leave_reason"
-        android:textSize="15dp"
-        android:textColor="@color/white" />
+        <Button
+            android:id="@+id/accept"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            style="?attr/buttonBarPositiveButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/accept" />
 
-    <TextView
-        android:id="@+id/to_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_below="@+id/from_date"
-        android:textSize="15dp"
-        android:textColor="@color/white" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/leave_reason"
-        android:layout_below="@+id/to_date"
-        android:layout_marginTop="55dp"
-        android:textSize="15dp"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/accept"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/accept"
-        android:layout_marginTop="100dp"
-        android:textColor="@color/black" />
-
-    <Button
-        android:id="@+id/reject"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/reject"
-        android:textColor="@color/black" />
+    </LinearLayout>
 
 </LinearLayout>

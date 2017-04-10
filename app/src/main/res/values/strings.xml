@@ -30,4 +30,9 @@
     <string name="logout">Logout</string>
     <string name="accept">Accept</string>
     <string name="reject">Reject</string>
+    <string name="leave_type">LEAVE TYPE</string>
+    <string name="date_of_application">DATE OF APPLICATION</string>
+    <string name="from">FROM</string>
+    <string name="to">TO</string>
+    <string name="reason">REASON</string>
 </resources>

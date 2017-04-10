@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 public class Leave implements Parcelable {
 
+    private long id;
     private String employee;
     private String supervisor;
     public String leaveType;
@@ -17,7 +18,7 @@ public class Leave implements Parcelable {
 
     public Leave(){}
 
-    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate) {
+    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate, long id) {
         this.employee = employee;
         this.supervisor = supervisor;
         this.leaveType = leaveType;
@@ -26,7 +27,9 @@ public class Leave implements Parcelable {
         this.toDate = toDate;
         this.leaveStatus = leaveStatus;
         this.applicationDate = applicationDate;
+        this.id = id;
     }
+
 
     protected Leave(Parcel in) {
         employee = in.readString();
@@ -37,6 +40,7 @@ public class Leave implements Parcelable {
         toDate = in.readString();
         leaveStatus = in.readLong();
         applicationDate = in.readString();
+        id = in.readLong();
     }
 
     public static final Creator<Leave> CREATOR = new Creator<Leave>() {
@@ -115,6 +119,14 @@ public class Leave implements Parcelable {
         this.applicationDate = applicationDate;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -130,5 +142,6 @@ public class Leave implements Parcelable {
         dest.writeString(toDate);
         dest.writeLong(leaveStatus);
         dest.writeString(applicationDate);
+        dest.writeLong(id);
     }
 }

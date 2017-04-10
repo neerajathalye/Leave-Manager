@@ -2,16 +2,23 @@ package com.neeraj8le.leavemanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.model.Leave;
 
-public class RequestLeaveActivity extends AppCompatActivity {
+public class RequestLeaveActivity extends AppCompatActivity implements View.OnClickListener {
     TextView leave_type,leave_reason,from_date,to_date,current_date;
     Button accept,reject;
     Leave leave;
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +37,35 @@ public class RequestLeaveActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         leave=getIntent().getParcelableExtra("leave");
-//        String leavetype=intent.getStringExtra("Leave Type:");
-//        String leavereason=intent.getStringExtra("Leave Reason:");
-//        String leaveduration=intent.getStringExtra("Leave Duration:");
-        leave_type.setText("Leave Type:"+leave.leaveType);
-        leave_reason.setText("Leave Reason:"+leave.leaveReason);
-        from_date.setText("From:"+leave.fromDate);
-        to_date.setText("To:"+leave.toDate);
-        current_date.setText("Application Date:"+leave.applicationDate);
+        leave_type.setText(leave.getLeaveType());
+        leave_reason.setText(leave.getLeaveReason());
+        from_date.setText(leave.getFromDate());
+        to_date.setText(leave.getToDate());
+        current_date.setText(leave.getApplicationDate());
+
+        accept.setOnClickListener(this);
+        reject.setOnClickListener(this);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.accept:
+                leave.setLeaveStatus(1);
+                mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
+                finish();
+                break;
+            case R.id.reject:
+                leave.setLeaveStatus(2);
+                mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
+
+                finish();
+                break;
+        }
     }
 }

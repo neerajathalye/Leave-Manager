@@ -135,21 +135,20 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String reason=leave_reason.getEditText().getText().toString();
-                String from=from_date.getEditText().getText().toString();
-                String to=to_date.getEditText().getText().toString();
-                String leaveType = selectedLeave;
+                final String reason=leave_reason.getEditText().getText().toString();
+                final String from=from_date.getEditText().getText().toString();
+                final String to=to_date.getEditText().getText().toString();
+                final String leaveType = selectedLeave;
                 Calendar c = Calendar.getInstance();
                 String myFormat="dd MMM yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                String applicationDate = sdf.format(c.getTime());
-
-                final Leave leave = new Leave(employee.getName(), employee.getsupervisorName(), leaveType, reason, from, to, 0, applicationDate);
+                final String applicationDate = sdf.format(c.getTime());
 
                 mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         size = dataSnapshot.getChildrenCount();
+                        final Leave leave = new Leave(employee.getName(), employee.getsupervisorName(), leaveType, reason, from, to, 0, applicationDate, size);
                         mDatabase.child(String.valueOf(size)).setValue(leave);
                         finish();
                     }
