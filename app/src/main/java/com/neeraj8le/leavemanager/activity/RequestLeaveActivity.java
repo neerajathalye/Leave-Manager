@@ -1,6 +1,5 @@
 package com.neeraj8le.leavemanager.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.model.Leave;
 
-public class LeavePermission extends AppCompatActivity {
+public class RequestLeaveActivity extends AppCompatActivity {
     TextView leave_type,leave_reason,from_date,to_date,current_date;
     Button accept,reject;
     Leave leave;
@@ -17,7 +16,7 @@ public class LeavePermission extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leave_permission);
+        setContentView(R.layout.activity_request_leave);
         leave_type=(TextView)findViewById(R.id.leave_type);
         leave_reason=(TextView)findViewById(R.id.leave_reason);
         from_date=(TextView)findViewById(R.id.from_date);

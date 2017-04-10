@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neeraj8le.leavemanager.R;
-import com.neeraj8le.leavemanager.activity.LeavePermission;
+import com.neeraj8le.leavemanager.activity.RequestLeaveActivity;
 import com.neeraj8le.leavemanager.model.Leave;
 import com.neeraj8le.leavemanager.viewholder.RequestsViewHolder;
 
@@ -53,7 +53,7 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
             @Override
             public void onClick(View v) {
 //                Toast.makeText(context, String.valueOf(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context,LeavePermission.class);
+                Intent intent=new Intent(context,RequestLeaveActivity.class);
                 Leave leave=new Leave(leaves.get(position).getEmployee(),leaves.get(position).getSupervisor(),leaves.get(position).getLeaveType()
                 ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
                         leaves.get(position).getApplicationDate());

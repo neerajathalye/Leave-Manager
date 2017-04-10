@@ -29,7 +29,7 @@
             android:label="Add Leave details"
             android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".activity.LeavePermission"
+            android:name=".activity.RequestLeaveActivity"
             android:label="Leave Summary"
             android:parentActivityName=".activity.MainActivity">
         </activity>
