@@ -74,15 +74,11 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         int id = item.getItemId();
         switch(id) {
             case android.R.id.home:
-                onBackPressed();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-        finish();
-    }
+
 }

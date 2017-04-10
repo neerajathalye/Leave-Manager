@@ -35,4 +35,6 @@
     <string name="from">FROM</string>
     <string name="to">TO</string>
     <string name="reason">REASON</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="update">Update</string>
 </resources>

@@ -101,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout:
                 mAuth.signOut();
                 return true;
+            case R.id.editProfile:
+                Intent intent=new Intent(this,EditProfileActivity.class);
+                startActivity(intent);
+                return  true;
             default:
                 return super.onOptionsItemSelected(item);
         }

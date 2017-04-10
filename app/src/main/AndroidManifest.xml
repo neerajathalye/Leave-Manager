@@ -31,8 +31,10 @@
         <activity
             android:name=".activity.RequestLeaveActivity"
             android:label="Leave Summary"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
+            android:parentActivityName=".activity.MainActivity"/>
+        <activity android:name=".activity.EditProfileActivity"
+            android:label="Edit Profile"
+            android:parentActivityName=".activity.MainActivity"/>
     </application>
 
 </manifest>
