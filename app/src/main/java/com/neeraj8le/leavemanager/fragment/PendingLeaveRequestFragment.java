@@ -54,11 +54,11 @@ public class PendingLeaveRequestFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 leaves = new ArrayList<>();
-                employee = getArguments().getParcelable("employee");
+
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {
-                    if(ds.child("employee").getValue().equals(employee.getName()) && (long) ds.child("leaveStatus").getValue() == 0)
+                    if(ds.child("employee").getValue().equals(employee.name) && (long) ds.child("leaveStatus").getValue() == 0)
                     {
                         leaves.add(ds.getValue(Leave.class));
 //                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();

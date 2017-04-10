@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Employee implements Parcelable{
 
     private String id;
-    private String name;
+    public String name;
     private String departmentName;
     private String designation;
     private String phoneNumber;

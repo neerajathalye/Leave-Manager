@@ -2,6 +2,7 @@ package com.neeraj8le.leavemanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
         leave=getIntent().getParcelableExtra("leave");
         leave_type.setText(leave.getLeaveType());
         leave_reason.setText(leave.getLeaveReason());
@@ -63,9 +65,24 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
             case R.id.reject:
                 leave.setLeaveStatus(2);
                 mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
-
                 finish();
                 break;
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
     }
 }
