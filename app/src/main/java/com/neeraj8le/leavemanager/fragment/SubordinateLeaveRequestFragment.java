@@ -21,6 +21,8 @@ import com.neeraj8le.leavemanager.model.Employee;
 import com.neeraj8le.leavemanager.model.Leave;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +62,23 @@ public class SubordinateLeaveRequestFragment extends Fragment {
                         if(ds.child("supervisor").getValue().equals(employee.getName()))
                         {
                             leaves.add(ds.getValue(Leave.class));
-//                          Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
-
                         }
                 }
+
+                Collections.sort(leaves, new Comparator<Leave>() {
+                    @Override
+                    public int compare(Leave o1, Leave o2) {
+                        if(o1.getLeaveStatus() == 0 || o2.getLeaveStatus() == 0)
+                            return -1;
+                        else if(o1.getLeaveStatus() == o2.getLeaveStatus())
+                            return  o2.getApplicationDate().compareTo(o1.getApplicationDate());
+                        else if(o1.getLeaveStatus() != 0 || o2.getLeaveStatus() != 0)
+                            return  o2.getApplicationDate().compareTo(o1.getApplicationDate());
+                        else
+                            return  1;
+                    }
+                });
+
                 requestsRecyclerAdapter = new RequestsRecyclerAdapter(getContext(), leaves);
                 requestsRecyclerView = (RecyclerView) v.findViewById(R.id.requestsRecyclerView);
                 requestsRecyclerView.setAdapter(requestsRecyclerAdapter);

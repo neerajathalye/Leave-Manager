@@ -21,6 +21,8 @@ import com.neeraj8le.leavemanager.model.Employee;
 import com.neeraj8le.leavemanager.model.Leave;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +67,14 @@ public class PendingLeaveRequestFragment extends Fragment {
 
                     }
                 }
+
+                Collections.sort(leaves, new Comparator<Leave>() {
+                    @Override
+                    public int compare(Leave o1, Leave o2) {
+                        return  o2.getApplicationDate().compareTo(o1.getApplicationDate());
+                    }
+                });
+
                 pendingLeaveRequestRecyclerAdapter = new PendingLeaveRequestRecyclerAdapter(getContext(), leaves);
                 pendingLeaveRequestRecyclerView = (RecyclerView) v.findViewById(R.id.pendingLeaveRequestRecyclerView);
                 pendingLeaveRequestRecyclerView.setAdapter(pendingLeaveRequestRecyclerAdapter);

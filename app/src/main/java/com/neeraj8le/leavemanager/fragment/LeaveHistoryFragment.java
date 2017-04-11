@@ -16,11 +16,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.adapter.LeaveHistoryRecyclerAdapter;
-import com.neeraj8le.leavemanager.adapter.PendingLeaveRequestRecyclerAdapter;
 import com.neeraj8le.leavemanager.model.Employee;
 import com.neeraj8le.leavemanager.model.Leave;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class LeaveHistoryFragment extends Fragment {
     RecyclerView leaveHistoryRecyclerView;
     LeaveHistoryRecyclerAdapter leaveHistoryRecyclerAdapter;
-    ArrayList<Leave> leaves_history;
+    ArrayList<Leave> leaves;
     Employee employee;
     DatabaseReference mDatabase;
 
@@ -50,19 +51,27 @@ public class LeaveHistoryFragment extends Fragment {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 
-            leaves_history = new ArrayList<>();
+            leaves = new ArrayList<>();
 
             for (DataSnapshot ds : dataSnapshot.getChildren())
             {
 
                 if(ds.child("employee").getValue().equals(employee.getName()) && (long) ds.child("leaveStatus").getValue() != 0)
                 {
-                    leaves_history.add(ds.getValue(Leave.class));
+                    leaves.add(ds.getValue(Leave.class));
 //                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
 
                 }
             }
-            leaveHistoryRecyclerAdapter = new LeaveHistoryRecyclerAdapter(getContext(), leaves_history);
+
+            Collections.sort(leaves, new Comparator<Leave>() {
+                @Override
+                public int compare(Leave o1, Leave o2) {
+                    return  o2.getApplicationDate().compareTo(o1.getApplicationDate());
+                }
+            });
+
+            leaveHistoryRecyclerAdapter = new LeaveHistoryRecyclerAdapter(getContext(), leaves);
             leaveHistoryRecyclerView = (RecyclerView) v.findViewById(R.id.leaveHistoryRecyclerView);
             leaveHistoryRecyclerView.setAdapter(leaveHistoryRecyclerAdapter);
             leaveHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -74,9 +83,9 @@ public class LeaveHistoryFragment extends Fragment {
         }
     });
 
-//        leaves_history.add(new Leave("1", "1", "Maternity Leave", "Had a baby", "10 Apr 17", "1 May 17", 0, "30 Mar 17"));
-//        leaves_history.add(new Leave("1", "1", "Study Leave", "studying for mba", "10 Apr 17", "1 May 17", 1, "30 Mar 17"));
-//        leaves_history.add(new Leave("1", "1", "Casual Leave", "just for fun", "27 Apr 17", "14 May 17", 2, "30 Mar 17"));
+//        leaves.add(new Leave("1", "1", "Maternity Leave", "Had a baby", "10 Apr 17", "1 May 17", 0, "30 Mar 17"));
+//        leaves.add(new Leave("1", "1", "Study Leave", "studying for mba", "10 Apr 17", "1 May 17", 1, "30 Mar 17"));
+//        leaves.add(new Leave("1", "1", "Casual Leave", "just for fun", "27 Apr 17", "14 May 17", 2, "30 Mar 17"));
 
 
         return v;
