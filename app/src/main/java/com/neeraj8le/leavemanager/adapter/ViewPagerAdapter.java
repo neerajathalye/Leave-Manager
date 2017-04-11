@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
-    private Employee employee = new Employee();
+//    private Employee employee = new Employee();
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,10 +26,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Bundle args = new Bundle();
-        args.putParcelable("employee", employee);
+//        Bundle args = new Bundle();
+//        args.putParcelable("employee", employee);
 
-        mFragmentList.get(position).setArguments(args);
+//        mFragmentList.get(position).setArguments(args);
 
         return mFragmentList.get(position);
     }
@@ -39,10 +39,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return mFragmentList.size();
     }
 
-    public void addFragment(Fragment fragment, String title, Employee emp) {
+    public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
-        employee = emp;
+//        employee = emp;
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.adapter.ViewPagerAdapter;
@@ -50,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.app_name);
 //        getSupportActionBar().setTitle(SharedPrefManager.getInstance(MainActivity.this).getToken());
 
-        employee = getIntent().getParcelableExtra("employee");
+        SharedPreferences sharedPreferences = getSharedPreferences("EMPLOYEE_FILE_KEY", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("employee", "");
+        employee = gson.fromJson(json, Employee.class);
+
+
+//        employee = getIntent().getParcelableExtra("employee");
 //        Toast.makeText(this, "main : " + employee.getName(), Toast.LENGTH_SHORT).show();
 
         mAuth = FirebaseAuth.getInstance();
@@ -90,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddLeaveActivity.class);
-                intent.putExtra("employee", employee);
+//                intent.putExtra("employee", employee);
                 startActivity(intent);
             }
         });
@@ -104,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PendingLeaveRequestFragment(), "Pending", employee);
-        adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests", employee);
-        adapter.addFragment(new LeaveHistoryFragment(), "History", employee);
+        adapter.addFragment(new PendingLeaveRequestFragment(), "Pending");
+        adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests");
+        adapter.addFragment(new LeaveHistoryFragment(), "History");
         viewPager.setAdapter(adapter);
     }
 

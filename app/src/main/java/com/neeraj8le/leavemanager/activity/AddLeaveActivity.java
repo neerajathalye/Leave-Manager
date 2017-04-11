@@ -2,6 +2,7 @@ package com.neeraj8le.leavemanager.activity;
 
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.fragment.DatePickerFragment;
 import com.neeraj8le.leavemanager.model.Employee;
@@ -85,7 +87,12 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
-        employee = getIntent().getParcelableExtra("employee");
+//        employee = getIntent().getParcelableExtra("employee");
+
+        SharedPreferences sharedPreferences = getSharedPreferences("EMPLOYEE_FILE_KEY", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("employee", "");
+        employee = gson.fromJson(json, Employee.class);
 
 //        final DatePickerDialog.OnDateSetListener date=new DatePickerDialog.OnDateSetListener(){
 //            @Override

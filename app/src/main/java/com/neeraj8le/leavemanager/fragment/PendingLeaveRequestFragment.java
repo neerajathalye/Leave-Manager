@@ -1,6 +1,7 @@
 package com.neeraj8le.leavemanager.fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.adapter.PendingLeaveRequestRecyclerAdapter;
 import com.neeraj8le.leavemanager.model.Employee;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -47,7 +50,14 @@ public class PendingLeaveRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         final View v =  inflater.inflate(R.layout.fragment_pending_leave_request, container, false);
 
-        employee = getArguments().getParcelable("employee");
+//        employee = getArguments().getParcelable("employee");
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMPLOYEE_FILE_KEY", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("employee", "");
+        employee = gson.fromJson(json, Employee.class);
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -60,7 +70,7 @@ public class PendingLeaveRequestFragment extends Fragment {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {
-                    if(ds.child("employee").getValue().equals(employee.name) && (long) ds.child("leaveStatus").getValue() == 0)
+                    if(ds.child("employee").getValue().equals(employee.getName()) && (long) ds.child("leaveStatus").getValue() == 0)
                     {
                         leaves.add(ds.getValue(Leave.class));
 //                        Toast.makeText(getContext(), leaves.get(0).getLeaveReason(), Toast.LENGTH_SHORT).show();
