@@ -149,7 +149,7 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         size = dataSnapshot.getChildrenCount();
-                        final Leave leave = new Leave(employee.getName(), employee.getSupervisorName(), leaveType, reason, from, to, 0, applicationDate, size);
+                        final Leave leave = new Leave(employee.getName(), employee.getSupervisorName(), leaveType, reason, from, to, 0, applicationDate, size, employee.getToken());
                         mDatabase.child(String.valueOf(size)).setValue(leave);
                         finish();
                     }

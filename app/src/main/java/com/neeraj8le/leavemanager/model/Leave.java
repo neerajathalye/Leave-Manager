@@ -15,10 +15,11 @@ public class Leave implements Parcelable {
     private String toDate;
     private long leaveStatus; // 0 --> on hold, 1 --> accepted, 2 --> rejected
     private String applicationDate;
+    private String token;
 
     public Leave(){}
 
-    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate, long id) {
+    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate, long id, String token) {
         this.employee = employee;
         this.supervisor = supervisor;
         this.leaveType = leaveType;
@@ -28,6 +29,7 @@ public class Leave implements Parcelable {
         this.leaveStatus = leaveStatus;
         this.applicationDate = applicationDate;
         this.id = id;
+        this.token = token;
     }
 
 
@@ -41,6 +43,7 @@ public class Leave implements Parcelable {
         leaveStatus = in.readLong();
         applicationDate = in.readString();
         id = in.readLong();
+        token = in.readString();
     }
 
     public static final Creator<Leave> CREATOR = new Creator<Leave>() {
@@ -127,6 +130,14 @@ public class Leave implements Parcelable {
         this.id = id;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -143,5 +154,6 @@ public class Leave implements Parcelable {
         dest.writeLong(leaveStatus);
         dest.writeString(applicationDate);
         dest.writeLong(id);
+        dest.writeString(token);
     }
 }
