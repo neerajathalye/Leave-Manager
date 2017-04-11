@@ -9,7 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SignInActivity">
+        <service
+            android:name=".firebase.MyFirebaseInstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".activity.SignInActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,22 +36,25 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activity.SignUpActivity"
             android:label="Sign Up"
-            android:parentActivityName=".activity.SignInActivity" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AddLeaveActivity"
             android:label="Add Leave details"
-            android:parentActivityName=".activity.MainActivity" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RequestLeaveActivity"
             android:label="Leave Summary"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.EditProfileActivity"
             android:label="Edit Profile"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

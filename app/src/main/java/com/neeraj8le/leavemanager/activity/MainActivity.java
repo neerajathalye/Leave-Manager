@@ -1,6 +1,9 @@
 package com.neeraj8le.leavemanager.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +18,9 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.adapter.ViewPagerAdapter;
+import com.neeraj8le.leavemanager.firebase.MyFirebaseInstanceIDService;
 import com.neeraj8le.leavemanager.fragment.LeaveHistoryFragment;
 import com.neeraj8le.leavemanager.fragment.PendingLeaveRequestFragment;
 import com.neeraj8le.leavemanager.fragment.SubordinateLeaveRequestFragment;
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Employee employee;
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +43,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.app_name);
+//        getSupportActionBar().setTitle(SharedPrefManager.getInstance(MainActivity.this).getToken());
 
         employee = getIntent().getParcelableExtra("employee");
 //        Toast.makeText(this, "main : " + employee.getName(), Toast.LENGTH_SHORT).show();
 
         mAuth = FirebaseAuth.getInstance();
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+            }
+        };
+
+        registerReceiver(broadcastReceiver, new IntentFilter(MyFirebaseInstanceIDService.TOKEN_BROADCAST));
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override

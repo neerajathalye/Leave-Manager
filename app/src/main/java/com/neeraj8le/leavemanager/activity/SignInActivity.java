@@ -79,10 +79,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null)
                 {
-                    progressDialog.show();
+                    Toast.makeText(SignInActivity.this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+//                    progressDialog.show();
                     if (user.isEmailVerified())
                     {
-
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
