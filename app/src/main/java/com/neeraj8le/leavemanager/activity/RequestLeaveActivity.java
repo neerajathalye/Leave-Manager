@@ -37,7 +37,6 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         leave=getIntent().getParcelableExtra("leave");
         leave_type.setText(leave.getLeaveType());
         leave_reason.setText(leave.getLeaveReason());
@@ -59,15 +58,14 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         {
             case R.id.accept:
                 leave.setLeaveStatus(1);
-                mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
-                finish();
+
                 break;
             case R.id.reject:
                 leave.setLeaveStatus(2);
-                mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
-                finish();
                 break;
         }
+        mDatabase.child(String.valueOf(leave.getId())).setValue(leave);
+        finish();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
