@@ -15,8 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.adapter.ViewPagerAdapter;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Employee employee;
     private BroadcastReceiver broadcastReceiver;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, "main : " + employee.getName(), Toast.LENGTH_SHORT).show();
 
         mAuth = FirebaseAuth.getInstance();
+//        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
+//                Toast.makeText(context, SharedPrefManager.getInstance(MainActivity.this).getToken(), Toast.LENGTH_SHORT).show();
+//                mDatabase.child("employee").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("token").setValue(SharedPrefManager.getInstance(MainActivity.this).getToken());
             }
         };
 

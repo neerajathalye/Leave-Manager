@@ -127,7 +127,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 } else {
                     progressDialog.show();
 
-                    final Employee employee = new Employee(emp_id, name, dept_name, desig, contact, email, supervisor);
+//                    final Employee employee = new Employee(emp_id, name, dept_name, desig, contact, email, supervisor);
                 }
             }
 

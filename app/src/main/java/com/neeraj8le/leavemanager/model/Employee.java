@@ -12,10 +12,11 @@ public class Employee implements Parcelable{
     private String phoneNumber;
     private String email;
     private String supervisorName;
+    private String token;
 
     public Employee() {}
 
-    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String supervisorName) {
+    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String supervisorName, String token) {
         this.id = id;
         this.name = name;
         this.departmentName = departmentName;
@@ -23,6 +24,7 @@ public class Employee implements Parcelable{
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.supervisorName = supervisorName;
+        this.token = token;
     }
 
     protected Employee(Parcel in) {
@@ -33,6 +35,7 @@ public class Employee implements Parcelable{
         phoneNumber = in.readString();
         email = in.readString();
         supervisorName = in.readString();
+        token = in.readString();
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {
@@ -96,12 +99,21 @@ public class Employee implements Parcelable{
         this.email = email;
     }
 
-    public String getsupervisorName() {
+
+    public String getSupervisorName() {
         return supervisorName;
     }
 
-    public void setsupervisorName(String supervisorName) {
+    public void setSupervisorName(String supervisorName) {
         this.supervisorName = supervisorName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
@@ -118,5 +130,6 @@ public class Employee implements Parcelable{
         dest.writeString(phoneNumber);
         dest.writeString(email);
         dest.writeString(supervisorName);
+        dest.writeString(token);
     }
 }

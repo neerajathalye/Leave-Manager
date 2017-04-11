@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.model.Employee;
 
 import java.util.regex.Matcher;
@@ -61,6 +62,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         signUpButton=(Button)findViewById(R.id.signUpButton);
         signInButton = (Button) findViewById(R.id.signInButton);
 
+        Toast.makeText(this, SharedPrefManager.getInstance(this).getToken(), Toast.LENGTH_SHORT).show();
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setTitle("Please Wait");
@@ -79,7 +82,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null)
                 {
-                    Toast.makeText(SignInActivity.this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
 //                    progressDialog.show();
                     if (user.isEmailVerified())
                     {
@@ -90,7 +92,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                 {
                                     if (ds.child("email").getValue().equals(mAuth.getCurrentUser().getEmail()))
                                     {
+
                                         employee = ds.getValue(Employee.class);
+
+                                        String refreshedToken = SharedPrefManager.getInstance(SignInActivity.this).getToken();
+
+                                        mDatabase.child(mAuth.getCurrentUser().getUid()).child("token").setValue(refreshedToken);
+
 //                                        Toast.makeText(SignInActivity.this, "Sign in " + employee.getName(), Toast.LENGTH_SHORT).show();
                                         progressDialog.dismiss();
                                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);

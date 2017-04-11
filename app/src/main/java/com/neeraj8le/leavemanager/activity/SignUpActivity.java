@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.model.Employee;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     boolean userExists = false;
     ProgressDialog progressDialog;
+    String token;
 
     void showToast(String msg)
 
@@ -68,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
         emailTextInputLayout= (TextInputLayout) findViewById(R.id.emailTextInputLayout);
         passwordTextInputLayout = (TextInputLayout) findViewById(R.id.passwordTextInputLayout);
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
+
 
         supervisors = new ArrayList<>();
         supervisors.add("Select your supervisor");
@@ -200,7 +203,10 @@ public class SignUpActivity extends AppCompatActivity {
                  {
                      progressDialog.show();
 
-                     final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor);
+                     token = SharedPrefManager.getInstance(SignUpActivity.this).getToken();
+                     Toast.makeText(SignUpActivity.this, token, Toast.LENGTH_SHORT).show();
+
+                     final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor, token);
 
 
 //                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
