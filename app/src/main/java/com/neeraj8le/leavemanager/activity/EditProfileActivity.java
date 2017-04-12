@@ -72,7 +72,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String json = sharedPreferences.getString("employee", "");
         employee = gson.fromJson(json, Employee.class);
 
-//        supervisors = new ArrayList<>();
+        supervisors = new ArrayList<>();
 //        supervisors.add("Select your supervisor");
 //        supervisors.add("admin");
 //
@@ -105,6 +105,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 s1.setAdapter(adapter);
                 s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+                s1.setSelection(getDefaultSupervisor());
 
             }
 
@@ -118,15 +119,16 @@ public class EditProfileActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setTitle("Please Wait");
         progressDialog.setMessage("Updating your profile...");
-
+//
         idTextInputLayout.getEditText().setText(employee.getId());
         nameTextInputLayout.getEditText().setText(employee.getName());
         deptTextInputLayout.getEditText().setText(employee.getDepartmentName());
         designationTextInputLayout.getEditText().setText(employee.getDesignation());
         phoneTextInputLayout.getEditText().setText(employee.getPhoneNumber());
 
+        idTextInputLayout.setEnabled(false);
+        nameTextInputLayout.setEnabled(false);
 
-        s1.setSelection(getDefaultSupervisor());
 
 
         mUpdate.setOnClickListener(new View.OnClickListener()
@@ -169,6 +171,10 @@ public class EditProfileActivity extends AppCompatActivity {
                     final Employee modifiedEmployee = new Employee(emp_id, name, dept_name, desig, contact, employee.getEmail(), supervisor, employee.getToken());
 
                     mDatabase.child(mAuth.getCurrentUser().getUid()).setValue(modifiedEmployee);
+
+                    progressDialog.dismiss();
+
+                    finish();
                 }
             }
 

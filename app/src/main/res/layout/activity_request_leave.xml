@@ -12,6 +12,56 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/from"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/to"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:id="@+id/from_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="12 Apr 17"/>
+
+
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="17 Apr 17"/>
+
+        </LinearLayout>
+
         <TextView
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -29,40 +79,6 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/from"/>
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:id="@+id/from_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:text="12 Apr 17"/>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/to"
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:id="@+id/to_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:text="17 Apr 17"/>
         <TextView
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
