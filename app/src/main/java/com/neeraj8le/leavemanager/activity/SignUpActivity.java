@@ -143,8 +143,6 @@ public class SignUpActivity extends AppCompatActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-
-
                 idTextInputLayout.setErrorEnabled(false);
                 nameTextInputLayout.setErrorEnabled(false);
                 deptTextInputLayout.setErrorEnabled(false);
@@ -153,7 +151,6 @@ public class SignUpActivity extends AppCompatActivity {
                 emailTextInputLayout.setErrorEnabled(false);
                 passwordTextInputLayout.setErrorEnabled(false);
                 confirmPasswordTextInputLayout.setErrorEnabled(false);
-
 
                 String emp_id = idTextInputLayout.getEditText().getText().toString();
                 String name = nameTextInputLayout.getEditText().getText().toString();
@@ -164,7 +161,6 @@ public class SignUpActivity extends AppCompatActivity {
                 final String password = passwordTextInputLayout.getEditText().getText().toString();
                 String con_pass=confirmPasswordTextInputLayout.getEditText().getText().toString();
                 String supervisor = selectedSupervisor;
-
 
 
                  if (TextUtils.isEmpty(emp_id)) {
@@ -253,7 +249,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
         });
-
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

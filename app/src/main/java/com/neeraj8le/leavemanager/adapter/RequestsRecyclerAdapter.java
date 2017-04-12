@@ -58,6 +58,7 @@ public class RequestsRecyclerAdapter extends RecyclerView.Adapter<RequestsViewHo
 //                ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
 //                        leaves.get(position).getApplicationDate(), leaves.get(position).getId());
                 intent.putExtra("leave",leaves.get(holder.getAdapterPosition()));
+                intent.putExtra("intent_data_key","requests");
                 context.startActivity(intent);
             }
         });

@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/id"
                 android:enabled="false"
+                android:id="@+id/id"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
                 android:inputType="text"/>
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/white"
+                android:id="@+id/name"
                 android:backgroundTint="@color/white"
                 android:hint="@string/name"
                 android:inputType="textCapWords" />
@@ -60,6 +62,7 @@
                 android:layout_alignParentLeft="true"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
+                android:id="@+id/dept"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="6dp"
                 android:hint="@string/department"
@@ -81,6 +84,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="6dp"
+                android:id="@+id/desig"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
                 android:hint="@string/designation"
@@ -100,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:textColor="@color/white"
+                android:id="@+id/phone"
                 android:backgroundTint="@color/white"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="6dp"
@@ -129,8 +134,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
-                android:layout_marginTop="6dp"
+                android:id="@+id/email"
                 android:hint="@string/email"
+                android:layout_marginTop="6dp"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout

@@ -1,6 +1,7 @@
 package com.neeraj8le.leavemanager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.neeraj8le.leavemanager.R;
+import com.neeraj8le.leavemanager.activity.RequestLeaveActivity;
 import com.neeraj8le.leavemanager.model.Leave;
 import com.neeraj8le.leavemanager.viewholder.LeaveHistoryViewHolder;
 import com.neeraj8le.leavemanager.viewholder.LeaveHistoryViewHolder;
@@ -47,7 +49,13 @@ public class LeaveHistoryRecyclerAdapter extends RecyclerView.Adapter<LeaveHisto
         holder.history_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, String.valueOf(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context,RequestLeaveActivity.class);
+//                Leave leave=new Leave(leaves.get(position).getEmployee(),leaves.get(position).getSupervisor(),leaves.get(position).getLeaveType()
+//                ,leaves.get(position).getLeaveReason(),leaves.get(position).getFromDate(),leaves.get(position).getToDate(),leaves.get(position).getLeaveStatus(),
+//                        leaves.get(position).getApplicationDate(), leaves.get(position).getId());
+                intent.putExtra("leave",leaves_history.get(holder.getAdapterPosition()));
+                intent.putExtra("intent_data_key","history");
+                context.startActivity(intent);
             }
         });
     }

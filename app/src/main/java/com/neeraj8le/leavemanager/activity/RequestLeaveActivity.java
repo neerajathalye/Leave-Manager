@@ -1,10 +1,12 @@
 package com.neeraj8le.leavemanager.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,8 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
     Button accept,reject;
     Leave leave;
     DatabaseReference mDatabase;
+    String intentData;
+    LinearLayout buttonBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,13 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         current_date=(TextView)findViewById(R.id.current_date);
         accept=(Button)findViewById(R.id.accept);
         reject=(Button)findViewById(R.id.reject);
+        buttonBar = (LinearLayout) findViewById(R.id.buttonBar);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        intentData = getIntent().getStringExtra("intent_data_key");
 
         leave=getIntent().getParcelableExtra("leave");
         leave_type.setText(leave.getLeaveType());
@@ -44,8 +51,22 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         to_date.setText(leave.getToDate());
         current_date.setText(leave.getApplicationDate());
 
+        if(intentData.equals("pending") || intentData.equals("history"))
+        {
+            buttonBar.setVisibility(View.GONE);
+        }
+        else if(intentData.equals("requests") && leave.getLeaveStatus() != 0)
+            buttonBar.setVisibility(View.GONE);
+
         accept.setOnClickListener(this);
         reject.setOnClickListener(this);
+
+//        if(history.equals("history") || pending.equals("pending"))
+//        {
+//            accept.setVisibility(View.GONE);
+//            reject.setVisibility(View.GONE);
+//        }
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
