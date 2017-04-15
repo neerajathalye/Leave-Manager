@@ -110,6 +110,23 @@
             android:textColor="@color/white"
             android:text="reason for leave here"/>
 
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/status"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/status"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="Status info"/>
+
     </LinearLayout>
 
     <LinearLayout

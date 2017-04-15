@@ -18,7 +18,7 @@ import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.model.Leave;
 
 public class RequestLeaveActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView leave_type,leave_reason,from_date,to_date,current_date;
+    TextView leave_type,leave_reason,from_date,to_date,current_date,status;
     Button accept,reject;
     Leave leave;
     DatabaseReference mDatabase;
@@ -34,6 +34,7 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         from_date=(TextView)findViewById(R.id.from_date);
         to_date=(TextView)findViewById(R.id.to_date);
         current_date=(TextView)findViewById(R.id.current_date);
+        status=(TextView)findViewById(R.id.status);
         accept=(Button)findViewById(R.id.accept);
         reject=(Button)findViewById(R.id.reject);
         buttonBar = (LinearLayout) findViewById(R.id.buttonBar);
@@ -50,6 +51,20 @@ public class RequestLeaveActivity extends AppCompatActivity implements View.OnCl
         from_date.setText(leave.getFromDate());
         to_date.setText(leave.getToDate());
         current_date.setText(leave.getApplicationDate());
+//        status.setText(leave.getLeaveStatus());
+        if(leave.getLeaveStatus() == 0 )
+        {
+            status.setText("On Hold");
+        }
+        else if(leave.getLeaveStatus() == 1 )
+        {
+            status.setText("Accepted");
+        }
+        else if(leave.getLeaveStatus() == 2 )
+        {
+            status.setText("Rejected");
+        }
+
 
         if(intentData.equals("pending") || intentData.equals("history"))
         {
