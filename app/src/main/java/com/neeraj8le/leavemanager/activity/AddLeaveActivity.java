@@ -18,8 +18,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import com.google.firebase.database.DataSnapshot;
@@ -87,24 +89,11 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("leave");
 
-//        employee = getIntent().getParcelableExtra("employee");
 
         SharedPreferences sharedPreferences = getSharedPreferences("EMPLOYEE_FILE_KEY", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("employee", "");
         employee = gson.fromJson(json, Employee.class);
-
-//        final DatePickerDialog.OnDateSetListener date=new DatePickerDialog.OnDateSetListener(){
-//            @Override
-//            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-//                myCalendar.set(Calendar.YEAR,year);
-//                myCalendar.set(Calendar.MONTH,month);
-//                myCalendar.set(Calendar.DAY_OF_MONTH,day);
-//                updateLabel();
-//            }
-//        };
-
-
 
         mfrom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +101,11 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
 //                new DatePickerDialog(AddLeaveActivity.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),
 //                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 selectedEditText = mfrom;
+                long minDate = 0;
+                Bundle bundle = new Bundle();
+                bundle.putLong("minDate", minDate);
                 DialogFragment dialogFragment=new DatePickerFragment();
+                dialogFragment.setArguments(bundle);
                 dialogFragment.show(getSupportFragmentManager(),"datePicker");
                 updateDate(mfrom);
             }
@@ -121,7 +114,33 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View view) {
                 selectedEditText = mto;
+
+                long minDate = 0;
+                SimpleDateFormat f = null;
+                Date d = null;
+                String dateParts[] = mfrom.getText().toString().split(" ");
+                if(dateParts[0].length() == 2)
+                    f = new SimpleDateFormat("dd MMM yy");
+                else if(dateParts[0].length() == 1)
+                    f = new SimpleDateFormat("d MMM yy");
+                try {
+                    if(dateParts[0].length() == 2)
+                        d = f.parse(mfrom.getText().toString().substring(0, 9));
+                    else if(dateParts[0].length() == 1)
+                        d = f.parse(mfrom.getText().toString().substring(0, 8));
+                    if(d != null)
+                        minDate = d.getTime();
+                    else
+                        minDate = 0;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putLong("minDate", minDate);
+
                 DialogFragment dialogFragment=new DatePickerFragment();
+                dialogFragment.setArguments(bundle);
                 dialogFragment.show(getSupportFragmentManager(),"datePicker");
                 updateDate(mto);
 //                new DatePickerDialog(AddLeaveActivity.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),

@@ -7,12 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.neeraj8le.leavemanager.R;
 import com.neeraj8le.leavemanager.activity.AddLeaveActivity;
 
 import java.util.Calendar;
@@ -21,6 +16,7 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class DatePickerFragment extends DialogFragment {
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,8 +24,14 @@ public class DatePickerFragment extends DialogFragment {
          int year=c.get(Calendar.YEAR);
          int month=c.get(Calendar.MONTH);
          int day=c.get(Calendar.DAY_OF_MONTH);
+
+        long minDate = getArguments().getLong("minDate", 0);
         DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(),(AddLeaveActivity) getActivity(),year,month,day);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+
+        if(minDate == 0)
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+        else
+            datePickerDialog.getDatePicker().setMinDate(minDate);
         return datePickerDialog;
     }
 
