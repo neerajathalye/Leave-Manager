@@ -75,6 +75,9 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
         mto=(EditText)findViewById(R.id.to);
         s1 = (Spinner) findViewById(R.id.leave_type_spinner);
 
+        to_date.setEnabled(false);
+        mto.setEnabled(false);
+
         adapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, leave_type);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
@@ -108,6 +111,9 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                 dialogFragment.setArguments(bundle);
                 dialogFragment.show(getSupportFragmentManager(),"datePicker");
                 updateDate(mfrom);
+
+                to_date.setEnabled(true);
+                mto.setEnabled(true);
             }
         });
         mto.setOnClickListener(new View.OnClickListener() {
