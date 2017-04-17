@@ -9,5 +9,14 @@
         android:id="@+id/leaveHistoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/defaultBackground"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:text="You have not applied for any leaves!"/>
 
 </FrameLayout>

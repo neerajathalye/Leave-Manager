@@ -86,7 +86,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     Toast.makeText(SignInActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
 
-//                    progressDialog.show();
+                    progressDialog.show();
                     if (user.isEmailVerified())
                     {
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {

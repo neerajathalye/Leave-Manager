@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +39,7 @@ public class SubordinateLeaveRequestFragment extends Fragment {
     ArrayList<Leave> leaves;
     Employee employee;
     DatabaseReference mDatabase;
+    TextView defaultBackground;
 
     public SubordinateLeaveRequestFragment() {
         // Required empty public constructor
@@ -49,6 +51,8 @@ public class SubordinateLeaveRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_subordinate_leave_request, container, false);
+
+        defaultBackground = (TextView) v.findViewById(R.id.defaultBackground);
 
 //        employee = getArguments().getParcelable("employee");
 
@@ -88,6 +92,11 @@ public class SubordinateLeaveRequestFragment extends Fragment {
                             return  1;
                     }
                 });
+
+                if(leaves.isEmpty())
+                    defaultBackground.setVisibility(View.VISIBLE);
+                else
+                    defaultBackground.setVisibility(View.GONE);
 
                 requestsRecyclerAdapter = new RequestsRecyclerAdapter(getContext(), leaves);
                 requestsRecyclerView = (RecyclerView) v.findViewById(R.id.requestsRecyclerView);

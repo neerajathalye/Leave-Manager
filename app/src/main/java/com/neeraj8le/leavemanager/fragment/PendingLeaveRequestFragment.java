@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,7 @@ public class PendingLeaveRequestFragment extends Fragment {
     ArrayList<Leave> leaves;
     Employee employee;
     DatabaseReference mDatabase;
+    TextView defaultBackground;
 
 
     public PendingLeaveRequestFragment() {
@@ -49,6 +51,8 @@ public class PendingLeaveRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v =  inflater.inflate(R.layout.fragment_pending_leave_request, container, false);
+
+        defaultBackground = (TextView) v.findViewById(R.id.defaultBackground);
 
 //        employee = getArguments().getParcelable("employee");
 
@@ -84,6 +88,11 @@ public class PendingLeaveRequestFragment extends Fragment {
                         return  o2.getApplicationDate().compareTo(o1.getApplicationDate());
                     }
                 });
+
+                if(leaves.isEmpty())
+                    defaultBackground.setVisibility(View.VISIBLE);
+                else
+                    defaultBackground.setVisibility(View.GONE);
 
                 pendingLeaveRequestRecyclerAdapter = new PendingLeaveRequestRecyclerAdapter(getContext(), leaves);
                 pendingLeaveRequestRecyclerView = (RecyclerView) v.findViewById(R.id.pendingLeaveRequestRecyclerView);

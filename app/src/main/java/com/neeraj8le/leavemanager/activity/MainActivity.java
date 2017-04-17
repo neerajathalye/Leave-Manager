@@ -19,17 +19,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.neeraj8le.leavemanager.R;
-import com.neeraj8le.leavemanager.SharedPrefManager;
 import com.neeraj8le.leavemanager.adapter.ViewPagerAdapter;
 import com.neeraj8le.leavemanager.firebase.MyFirebaseInstanceIDService;
 import com.neeraj8le.leavemanager.fragment.LeaveHistoryFragment;
@@ -144,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 confirmation=(TextView)findViewById(R.id.confirmation);
                 final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 alert.setTitle("Logout");
+                alert.setIcon(R.mipmap.ic_launcher);
                 // this is set the view from XML inside AlertDialog
                 alert.setView(alertLayout);
                 // disallow cancel of AlertDialog on click of back button and outside touch
