@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -177,21 +178,39 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 final String applicationDate = sdf.format(c.getTime());
 
-                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        size = dataSnapshot.getChildrenCount();
-                        final Leave leave = new Leave(employee.getName(), employee.getSupervisorName(), leaveType, reason, from, to, 0, applicationDate, size, employee.getToken());
-                        mDatabase.child(String.valueOf(size)).setValue(leave);
-                        finish();
-                    }
+                 if(selectedLeave.equals("Select Leave type"))
+                {
+                    showToast("Please select Leave type");
+                }
+                else if(TextUtils.isEmpty(reason))
+                 {
+                     leave_reason.setError("Enter reason for leave");
+                 }
+                 else if(TextUtils.isEmpty(from))
+                 {
+                     from_date.setError("Date cannot be empty");
+                 }
+                 else if(TextUtils.isEmpty(to))
+                {
+                    to_date.setError("Date cannot be empty");
+                }
+                else {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(DataSnapshot dataSnapshot) {
+                             size = dataSnapshot.getChildrenCount();
+                             final Leave leave = new Leave(employee.getName(), employee.getSupervisorName(), leaveType, reason, from, to, 0, applicationDate, size, employee.getToken());
+                             mDatabase.child(String.valueOf(size)).setValue(leave);
+                             finish();
+                         }
 
-                    }
-                });
+                         @Override
+                         public void onCancelled(DatabaseError databaseError) {
 
+                         }
+                     });
+                 }
 
             }
         });
@@ -214,8 +233,6 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
         myCalendar.set(Calendar.YEAR, i);
 
         updateDate(selectedEditText);
-
-
 
     }
 
