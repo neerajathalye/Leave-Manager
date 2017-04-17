@@ -38,4 +38,7 @@
     <string name="editProfile">Edit Profile</string>
     <string name="update">Update</string>
     <string name="status">STATUS</string>
+    <string name="exit_confirmation">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
