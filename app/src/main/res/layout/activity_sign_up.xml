@@ -106,16 +106,25 @@
                 android:inputType="phone"
                 android:maxLength="10"/>
         </android.support.design.widget.TextInputLayout>
-
-        <Spinner
+        <CheckBox
+            android:id="@+id/hrCheckBox"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner1"
-            android:spinnerMode="dialog"
+            android:text="@string/hr"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:buttonTint="@color/white"
+            tools:targetApi="lollipop" />
 
-            android:popupBackground="@color/colorBackground"/>
+        <!--<Spinner-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/spinner1"-->
+            <!--android:spinnerMode="dialog"-->
+            <!--android:popupBackground="@color/colorBackground"/>-->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

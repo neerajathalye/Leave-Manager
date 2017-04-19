@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,16 +41,17 @@ public class SignUpActivity extends AppCompatActivity {
     private Button mSubmit;
     TextInputLayout idTextInputLayout,nameTextInputLayout,deptTextInputLayout,designationTextInputLayout,phoneTextInputLayout,emailTextInputLayout
             ,passwordTextInputLayout,confirmPasswordTextInputLayout;
-    Spinner s1;
-    ArrayList<String> supervisors;
-    String selectedSupervisor;
-    ArrayAdapter<String> adapter;
+//    Spinner s1;
+//    ArrayList<String> supervisors;
+//    String selectedSupervisor;
+//    ArrayAdapter<String> adapter;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference mDatabase;
     boolean userExists = false;
     ProgressDialog progressDialog;
     String token;
+    CheckBox hrCheckBox;
 
     void showToast(String msg)
 
@@ -61,7 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        s1 = (Spinner) findViewById(R.id.spinner1);
+        hrCheckBox = (CheckBox) findViewById(R.id.hrCheckBox);
+//        s1 = (Spinner) findViewById(R.id.spinner1);
         mSubmit = (Button) findViewById(R.id.submit);
         idTextInputLayout = (TextInputLayout) findViewById(R.id.idTextInputLayout);
         nameTextInputLayout= (TextInputLayout) findViewById(R.id.nameTextInputLayout);
@@ -73,15 +76,15 @@ public class SignUpActivity extends AppCompatActivity {
         confirmPasswordTextInputLayout = (TextInputLayout) findViewById(R.id.confirmPasswordTextInputLayout);
 
 
-        supervisors = new ArrayList<>();
-        supervisors.add("Select your supervisor");
-        supervisors.add("admin");
+//        supervisors = new ArrayList<>();
+//        supervisors.add("Select your supervisor");
+//        supervisors.add("admin");
 
 
-        adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s1.setAdapter(adapter);
-        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        s1.setAdapter(adapter);
+//        s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,29 +94,29 @@ public class SignUpActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("employee");
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                supervisors = new ArrayList<>();
-                supervisors.add("Select your supervisor");
-
-                for (DataSnapshot ds : dataSnapshot.getChildren())
-                {
-                    supervisors.add(ds.child("name").getValue().toString());
-                }
-                adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                s1.setAdapter(adapter);
-                s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                supervisors = new ArrayList<>();
+//                supervisors.add("Select your supervisor");
+//
+//                for (DataSnapshot ds : dataSnapshot.getChildren())
+//                {
+//                    supervisors.add(ds.child("name").getValue().toString());
+//                }
+//                adapter = new ArrayAdapter<>(SignUpActivity.this, R.layout.simple_spinner_item, supervisors);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                s1.setAdapter(adapter);
+//                s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -161,7 +164,8 @@ public class SignUpActivity extends AppCompatActivity {
                 final String email = emailTextInputLayout.getEditText().getText().toString();
                 final String password = passwordTextInputLayout.getEditText().getText().toString();
                 String con_pass=confirmPasswordTextInputLayout.getEditText().getText().toString();
-                String supervisor = selectedSupervisor;
+                boolean isHR = hrCheckBox.isChecked();
+//                String supervisor = selectedSupervisor;
 
 
                  if (TextUtils.isEmpty(emp_id)) {
@@ -192,10 +196,10 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     confirmPasswordTextInputLayout.setError(getString(R.string.password_error));
                 }
-                else if(supervisor.equals(supervisors.get(0)))
-                 {
-                     showToast("Please select your supervisor");
-                 }
+//                else if(supervisor.equals(supervisors.get(0)))
+//                 {
+//                     showToast("Please select your supervisor");
+//                 }
                  else
                  {
                      progressDialog.show();
@@ -203,7 +207,8 @@ public class SignUpActivity extends AppCompatActivity {
                      token = SharedPrefManager.getInstance(SignUpActivity.this).getToken();
                      Toast.makeText(SignUpActivity.this, token, Toast.LENGTH_SHORT).show();
 
-                     final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor, token);
+//                     final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email,supervisor, token);
+                     final Employee employee = new Employee(emp_id,name,dept_name,desig,contact,email, token, isHR);
 
 
 //                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -250,18 +255,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
         });
-        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedSupervisor = s1.getSelectedItem().toString();
-                showToast(selectedSupervisor);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                showToast("Not Selected");
-            }
-        });
+//        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                selectedSupervisor = s1.getSelectedItem().toString();
+//                showToast(selectedSupervisor);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                showToast("Not Selected");
+//            }
+//        });
 
 }
     private boolean isValidEmail(String email) {

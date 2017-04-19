@@ -72,11 +72,8 @@ public class SubordinateLeaveRequestFragment extends Fragment {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren())
                 {
-                    if(ds.child("supervisor").getValue() != null)
-                        if(ds.child("supervisor").getValue().equals(employee.getName()))
-                        {
-                            leaves.add(ds.getValue(Leave.class));
-                        }
+                    if(ds.getValue() != null)
+                        leaves.add(ds.getValue(Leave.class));
                 }
 
                 Collections.sort(leaves, new Comparator<Leave>() {

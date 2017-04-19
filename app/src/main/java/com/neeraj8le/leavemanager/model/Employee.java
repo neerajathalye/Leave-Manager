@@ -6,25 +6,26 @@ import android.os.Parcelable;
 public class Employee implements Parcelable{
 
     private String id;
-    public String name;
+    private String name;
     private String departmentName;
     private String designation;
     private String phoneNumber;
     private String email;
-    private String supervisorName;
+//    private String supervisorName;
     private String token;
+    private boolean isHR;
 
     public Employee() {}
 
-    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String supervisorName, String token) {
+    public Employee(String id, String name, String departmentName, String designation, String phoneNumber, String email, String token, boolean isHR) {
         this.id = id;
         this.name = name;
         this.departmentName = departmentName;
         this.designation = designation;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.supervisorName = supervisorName;
         this.token = token;
+        this.isHR = isHR;
     }
 
     protected Employee(Parcel in) {
@@ -34,8 +35,8 @@ public class Employee implements Parcelable{
         designation = in.readString();
         phoneNumber = in.readString();
         email = in.readString();
-        supervisorName = in.readString();
         token = in.readString();
+        isHR = in.readByte() != 0;
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {
@@ -90,7 +91,6 @@ public class Employee implements Parcelable{
         this.phoneNumber = phoneNumber;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -99,21 +99,20 @@ public class Employee implements Parcelable{
         this.email = email;
     }
 
-
-    public String getSupervisorName() {
-        return supervisorName;
-    }
-
-    public void setSupervisorName(String supervisorName) {
-        this.supervisorName = supervisorName;
-    }
-
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public boolean isHR() {
+        return isHR;
+    }
+
+    public void setHR(boolean HR) {
+        isHR = HR;
     }
 
     @Override
@@ -129,7 +128,7 @@ public class Employee implements Parcelable{
         dest.writeString(designation);
         dest.writeString(phoneNumber);
         dest.writeString(email);
-        dest.writeString(supervisorName);
         dest.writeString(token);
+        dest.writeByte((byte) (isHR ? 1 : 0));
     }
 }

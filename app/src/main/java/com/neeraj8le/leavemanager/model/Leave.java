@@ -8,7 +8,7 @@ public class Leave implements Parcelable {
 
     private long id;
     private String employee;
-    private String supervisor;
+//    private String supervisor;
     private String leaveType;
     private String leaveReason;
     private String fromDate;
@@ -19,9 +19,9 @@ public class Leave implements Parcelable {
 
     public Leave(){}
 
-    public Leave(String employee, String supervisor, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate, long id, String token) {
+    public Leave(String employee, String leaveType, String leaveReason, String fromDate, String toDate, long leaveStatus, String applicationDate, long id, String token) {
         this.employee = employee;
-        this.supervisor = supervisor;
+//        this.supervisor = supervisor;
         this.leaveType = leaveType;
         this.leaveReason = leaveReason;
         this.fromDate = fromDate;
@@ -35,7 +35,7 @@ public class Leave implements Parcelable {
 
     protected Leave(Parcel in) {
         employee = in.readString();
-        supervisor = in.readString();
+//        supervisor = in.readString();
         leaveType = in.readString();
         leaveReason = in.readString();
         fromDate = in.readString();
@@ -66,13 +66,13 @@ public class Leave implements Parcelable {
         this.employee = employeeId;
     }
 
-    public String getSupervisor() {
-        return supervisor;
-    }
-
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
-    }
+//    public String getSupervisor() {
+//        return supervisor;
+//    }
+//
+//    public void setSupervisor(String supervisor) {
+//        this.supervisor = supervisor;
+//    }
 
     public String getLeaveType() {
         return leaveType;
@@ -146,7 +146,7 @@ public class Leave implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(employee);
-        dest.writeString(supervisor);
+//        dest.writeString(supervisor);
         dest.writeString(leaveType);
         dest.writeString(leaveReason);
         dest.writeString(fromDate);

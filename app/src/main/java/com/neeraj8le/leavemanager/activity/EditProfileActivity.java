@@ -40,10 +40,10 @@ import static com.neeraj8le.leavemanager.R.id.parent;
 public class EditProfileActivity extends AppCompatActivity {
     private Button mUpdate;
     TextInputLayout idTextInputLayout, nameTextInputLayout, deptTextInputLayout, designationTextInputLayout, phoneTextInputLayout;
-    Spinner s1;
-    ArrayList<String> supervisors;
-    String selectedSupervisor;
-    ArrayAdapter<String> adapter;
+//    Spinner s1;
+//    ArrayList<String> supervisors;
+//    String selectedSupervisor;
+//    ArrayAdapter<String> adapter;
     ProgressDialog progressDialog;
     Employee employee;
     DatabaseReference mDatabase;
@@ -59,7 +59,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        s1 = (Spinner) findViewById(R.id.spinner1);
+//        s1 = (Spinner) findViewById(R.id.spinner1);
         mUpdate = (Button) findViewById(R.id.update);
         idTextInputLayout = (TextInputLayout) findViewById(R.id.idTextInputLayout);
         nameTextInputLayout = (TextInputLayout) findViewById(R.id.nameTextInputLayout);
@@ -72,7 +72,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String json = sharedPreferences.getString("employee", "");
         employee = gson.fromJson(json, Employee.class);
 
-        supervisors = new ArrayList<>();
+//        supervisors = new ArrayList<>();
 //        supervisors.add("Select your supervisor");
 //        supervisors.add("admin");
 //
@@ -90,30 +90,30 @@ public class EditProfileActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("employee");
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                supervisors = new ArrayList<>();
-                supervisors.add("Select your supervisor");
-
-                for (DataSnapshot ds : dataSnapshot.getChildren())
-                {
-                    supervisors.add(ds.child("name").getValue().toString());
-                }
-                adapter = new ArrayAdapter<>(EditProfileActivity.this, R.layout.simple_spinner_item, supervisors);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                s1.setAdapter(adapter);
-                s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-                s1.setSelection(getDefaultSupervisor());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                supervisors = new ArrayList<>();
+//                supervisors.add("Select your supervisor");
+//
+//                for (DataSnapshot ds : dataSnapshot.getChildren())
+//                {
+//                    supervisors.add(ds.child("name").getValue().toString());
+//                }
+//                adapter = new ArrayAdapter<>(EditProfileActivity.this, R.layout.simple_spinner_item, supervisors);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                s1.setAdapter(adapter);
+//                s1.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+//                s1.setSelection(getDefaultSupervisor());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -148,7 +148,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String dept_name = deptTextInputLayout.getEditText().getText().toString();
                 String desig = designationTextInputLayout.getEditText().getText().toString();
                 String contact = phoneTextInputLayout.getEditText().getText().toString();
-                String supervisor = selectedSupervisor;
+//                String supervisor = selectedSupervisor;
 
 
                 if (TextUtils.isEmpty(emp_id)) {
@@ -163,12 +163,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     phoneTextInputLayout.setError(getString(R.string.field_cannot_be_empty));
                 } else if (contact.length() < 10) {
                     phoneTextInputLayout.setError(getString(R.string.invalid_number));
-                } else if (supervisor.equals(supervisors.get(0))) {
-                    showToast("Please select your supervisor");
+//                } else if (supervisor.equals(supervisors.get(0))) {
+//                    showToast("Please select your supervisor");
                 } else {
                     progressDialog.show();
 
-                    final Employee modifiedEmployee = new Employee(emp_id, name, dept_name, desig, contact, employee.getEmail(), supervisor, employee.getToken());
+                    final Employee modifiedEmployee = new Employee(emp_id, name, dept_name, desig, contact, employee.getEmail(), employee.getToken(), employee.isHR());
 
                     mDatabase.child(mAuth.getCurrentUser().getUid()).setValue(modifiedEmployee);
 
@@ -180,20 +180,20 @@ public class EditProfileActivity extends AppCompatActivity {
 
         });
 
-        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-
-        {
-            @Override
-            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
-                selectedSupervisor = s1.getSelectedItem().toString();
-                showToast(selectedSupervisor);
-            }
-
-            @Override
-            public void onNothingSelected (AdapterView < ? > parent){
-                showToast("Not Selected");
-            }
-        });
+//        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+//
+//        {
+//            @Override
+//            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
+//                selectedSupervisor = s1.getSelectedItem().toString();
+//                showToast(selectedSupervisor);
+//            }
+//
+//            @Override
+//            public void onNothingSelected (AdapterView < ? > parent){
+//                showToast("Not Selected");
+//            }
+//        });
 
     }
 
@@ -208,12 +208,12 @@ public class EditProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public int getDefaultSupervisor()
-    {
-        for(int i = 0; i < supervisors.size(); i++)
-            if (supervisors.get(i).equals(employee.getSupervisorName()))
-                return i;
-        return 0;
-    }
+//    public int getDefaultSupervisor()
+//    {
+//        for(int i = 0; i < supervisors.size(); i++)
+//            if (supervisors.get(i).equals(employee.getSupervisorName()))
+//                return i;
+//        return 0;
+//    }
     }
 

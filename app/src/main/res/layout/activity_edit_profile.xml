@@ -112,7 +112,7 @@
                 android:maxLength="10"/>
         </android.support.design.widget.TextInputLayout>
 
-        <Spinner
+        <!--<Spinner
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
@@ -120,7 +120,9 @@
             android:id="@+id/spinner1"
             android:spinnerMode="dialog"
 
-            android:popupBackground="@color/colorBackground"/>
+            android:popupBackground="@color/colorBackground"/>-->
+
+
         <Button
             android:id="@+id/update"
             android:layout_width="match_parent"

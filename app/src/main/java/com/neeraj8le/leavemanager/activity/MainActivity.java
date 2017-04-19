@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
         addLeaveFAB = (FloatingActionButton) findViewById(R.id.addLeaveFAB);
 
+
+
+
         addLeaveFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,17 +109,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager  = (ViewPager) findViewById(R.id.viewPager);
-        setupViewPager(viewPager);
+
+
+        if(employee.isHR())
+        {
+            setupViewPager(viewPager, true);
+            addLeaveFAB.setVisibility(View.GONE);
+        }
+        else
+        {
+            setupViewPager(viewPager, false);
+            addLeaveFAB.setVisibility(View.VISIBLE);
+        }
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, boolean isHR) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PendingLeaveRequestFragment(), "Pending");
-        adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests");
-        adapter.addFragment(new LeaveHistoryFragment(), "History");
+
+        if(isHR)
+        {
+            adapter.addFragment(new SubordinateLeaveRequestFragment(), "Requests");
+        }
+        else
+        {
+            adapter.addFragment(new PendingLeaveRequestFragment(), "Pending");
+            adapter.addFragment(new LeaveHistoryFragment(), "History");
+        }
+
         viewPager.setAdapter(adapter);
     }
 
