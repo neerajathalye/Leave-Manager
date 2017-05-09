@@ -183,7 +183,7 @@ public class AddLeaveActivity extends AppCompatActivity implements DatePickerDia
                 }
                 else if(TextUtils.isEmpty(reason))
                  {
-                     leave_reason.setError("Enter reason for leave");
+                     leave_reason.setError("Enter reason for leave now");
                  }
                  else if(TextUtils.isEmpty(from))
                  {
